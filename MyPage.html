@@ -40,14 +40,20 @@
             /* 배경 이미지를 커버하는 크기로 설정 */
         }
 
+        
+
+    
         body {
             background-color: white;
         }
 
-        .carousel-indicators .li{
-    background-color: rgb(209, 182, 182);
-}
-        
+        img {
+            margin: 0 40px 0 40px;
+            border: 2px solid rgb(245, 245, 248);
+            border-radius: 10px;
+        }
+
+       
     </style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -57,17 +63,17 @@
         // Firebase SDK 라이브러리 가져오기
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
-        import { getFirestore, collection, addDoc, getDocs, setDoc, doc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, getDocs, setDoc,doc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        // Firebase 구성 정보 설정
         const firebaseConfig = {
-            apiKey: "AIzaSyCzIX5h8SwGdDyZLsjja-eN-BwFutMGkvY",
-            authDomain: "sparta-26114.firebaseapp.com",
-            projectId: "sparta-26114",
-            storageBucket: "sparta-26114.appspot.com",
-            messagingSenderId: "218194191462",
-            appId: "1:218194191462:web:647832dcba096f347eb9a7",
-            measurementId: "G-JGP1CSZ3GR"
+            apiKey: "",
+            authDomain: "",
+            projectId: "",
+            storageBucket: "",
+            messagingSenderId: "",
+            appId: "",
+            measurementId: ""
         };
 
         // Firebase 인스턴스 초기화
@@ -75,12 +81,11 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-
+      
     </script>
 </head>
 
 <body>
-    <!-- header -->
     <header class="p-3 text-bg-dark">
         <!-- 컨테이너를 포함하는 div 요소로 헤더를 감싸줌 -->
         <div class="container">
@@ -97,7 +102,7 @@
                     <li><a href="#" class="nav-link px-2 text-danger">Home</a></li>
                     <li><a href="#" class="nav-link px-2 text-secondary">Mypage</a></li>
                     <li><a href="#" class="nav-link px-2 text-secondary">설문 하러가기</a></li>
-
+                   
                 </ul>
             </div>
         </div>
@@ -126,13 +131,12 @@
                     <div class="carousel-caption text-start">
                         <div class="image">
                             <img align="left"
-                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhZ-waSfgh5wHnB1kq6CiwFgl7ziNWpdGR0K5SlKxgPI6vz_3GUxrQaGyjy_dp6nwDUkY&usqp=CAU"
+                                src="https://i.namu.wiki/i/XnXRINhcCyXyRPqwM978u8a0w95g79oHYHjXfmG1FIGzT7A-s_cyjXKcN-JWEXiq7vEkiuyviPSwvxyN9R81_IXdQrT4F2f8hhLL4nbKykg7d1g0yFMIRBT4JtnQ8qjit2kRRqqx-v0hIdIEKDD6zA.webp"
                                 style="width:400px; height:400px;">
                         </div>
-                        <h1>Example headline.</h1>
-                        <p class="opacity-75">Some representative placeholder content for the first slide of the
-                            carousel.</p>
-                        <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
+                        <h1>나는 강아지다</h1>
+                        <p class="opacity-75">나의 MBTI의 맞춰봐!</p>
+                        <p><a class="btn btn-lg btn-primary" href="#">Are you curious?</a></p>
                     </div>
                 </div>
             </div>
@@ -145,12 +149,12 @@
                     <div class="carousel-caption text-end">
                         <div class="image">
                             <img align="right"
-                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhZ-waSfgh5wHnB1kq6CiwFgl7ziNWpdGR0K5SlKxgPI6vz_3GUxrQaGyjy_dp6nwDUkY&usqp=CAU"
+                                src="https://image.newsis.com/2023/07/12/NISI20230712_0001313626_web.jpg"
                                 style="width:400px; height:400px;">
                         </div>
-                        <h1>One more for good measure.</h1>
-                        <p>Some representative placeholder content for the third slide of this carousel.</p>
-                        <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
+                        <h1>나는 고양이다</h1>
+                        <p>나의 MBTI를 맞춰봐!</p>
+                        <p><a class="btn btn-lg btn-primary" href="#">Are you curious?</a></p>
                     </div>
                 </div>
             </div>
@@ -164,7 +168,7 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-
+   
 
 </body>
 
