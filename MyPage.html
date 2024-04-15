@@ -17,45 +17,97 @@
             font-family: "Gowun Dodum", sans-serif;
         }
 
-        /*상단의 로고*/
-        .title_logo {
-            height: 150px;
-            /*로고 높이 150*/
-            color: white;
-            /*텍스트 색상 : white*/
-
-            display: flex;
-            /* flexbox 레이아웃을 사용하여 요소를 가운데 정렬 */
-            flex-direction: column;
-            /* 세로 방향으로 배치 */
-            align-items: center;
-            /* 수평과 수직으로 가운데 정렬 */
-            justify-content: center;
-
-            /* 배경 이미지 설정 */
-            background-image: url('https://github.com/LeeNaYoung240/smell_mini-project/assets/107848521/22f3545f-bd3c-4ae7-920c-8a9dcbb86edb');
-            background-position: center;
-            background-size: cover;
-            /* 배경 이미지를 커버하는 크기로 설정 */
-        }
-
-
         body {
             background-color: white;
+        }
+
+        .member_container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 30px;
+            /* 간격 조절 */
+        }
+
+        .member_card_container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            /* 가운데 정렬 */
+            align-items: flex-start;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .member_card {
+            text-align: center;
+            width: 250px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+            margin: 30px 70px 50px 50px;
+        }
+
+        .member_card img {
+            width: 150px;
+            border-radius: 50%;
+        }
+
+        .member_card h3 {
+            font-size: 2.5rem;
+        }
+
+        .member_card p {
+            font-size: 1.5rem;
+        }
+
+        .intro_container {
+            width: calc(100% - 300px);
+            max-width: 650px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        .comments-section {
+            margin: 50px auto;
+            max-width: 800px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+
+        .comments-list {
+            margin-top: 20px;
+        }
+
+        .comment {
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .member_card_container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .intro_container {
+                width: calc(100% - 40px);
+                margin-top: 20px;
+            }
         }
     </style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="module">
-
-
         // Firebase SDK 라이브러리 가져오기
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
         import { getFirestore, collection, addDoc, getDocs, setDoc, doc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
 
         // Firebase 구성 정보 설정
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
         const firebaseConfig = {
             apiKey: "AIzaSyALOBgwNixaYE3Ckm2rVDAept8DluZ_d1E",
             authDomain: "bti-fbc0e.firebaseapp.com",
@@ -70,7 +122,84 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
+        const database = getDatabase(app);
 
+        // 댓글 데이터베이스 참조
+        const commentsRef = ref(database, 'comments');
+
+        // 페이지 로드 시 댓글 로드
+        onValue(commentsRef, (snapshot) => {
+            const comments = snapshot.val();
+            displayComments(comments);
+        });
+
+     
+        function displayComments(comments) {
+            const commentsList = document.querySelector('.comments-list');
+            commentsList.innerHTML = '';
+            for (const key in comments) {
+                const comment = comments[key];
+                const commentDiv = document.createElement('div');
+                commentDiv.classList.add('comment');
+                commentDiv.innerHTML = `
+                    <strong>${comment.name}</strong>: ${comment.message}
+                `;
+                commentsList.appendChild(commentDiv);
+            }
+        }
+
+        document.getElementById('comment-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const nameInput = document.getElementById('name-input');
+            const commentInput = document.getElementById('comment-input');
+            const name = nameInput.value.trim();
+            const message = commentInput.value.trim();
+            if (name !== '' && message !== '') {
+                try {
+                  
+                    await addDoc(collection(db, 'comments'), {
+                        name: name,
+                        message: message
+                    });
+                    nameInput.value = ''; 
+                    commentInput.value = ''; 
+                    alert('댓글 저장 성공!');
+
+                    // 추가 코드: 댓글이 추가되면 새로운 댓글을 불러옴
+                    getDocs(collection(db, 'comments')).then((querySnapshot) => {
+                        const comments = {};
+                        querySnapshot.forEach((doc) => {
+                            comments[doc.id] = doc.data();
+                        });
+                        displayCommentsInTable(comments);
+                    });
+                } catch (error) {
+                    console.error('Error adding comment: ', error);
+                }
+            }
+        });
+        function displayCommentsInTable(comments) {
+            const commentTableBody = document.getElementById('comment-table-body');
+            commentTableBody.innerHTML = '';
+            for (const key in comments) {
+                const comment = comments[key];
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${comment.name}</td>
+                    <td>${comment.message}</td>
+                `;
+                commentTableBody.appendChild(row);
+            }
+        }
+
+        // 페이지 로드 시 댓글 로드
+        getDocs(collection(db, 'comments')).then((querySnapshot) => {
+            const comments = {};
+            querySnapshot.forEach((doc) => {
+                comments[doc.id] = doc.data();
+            });
+            displayCommentsInTable(comments);
+        });
 
     </script>
 </head>
@@ -87,21 +216,70 @@
                         <use xlink:href="#bootstrap"></use>
                     </svg>
                 </a>
+                <img src="https://github.com/LeeNaYoung240/LeeNaYoung240.github.io/assets/107848521/7a88cc7b-a0cc-46ff-b75a-f5be7abb13c2"
+                    alt="팀 로고" width="200" height="150">
                 <!-- 메뉴 목록 -->
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li><a href="#" class="nav-link px-2 text-danger">Home</a></li>
                     <li><a href="#" class="nav-link px-2 text-secondary">Mypage</a></li>
                     <li><a href="#" class="nav-link px-2 text-secondary">설문 하러가기</a></li>
-
                 </ul>
             </div>
         </div>
     </header>
-    <div class="title_logo">
-        <h1>1BTI</h1>
+    <div class="title_logo"></div>
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <div class="member_container">
+        <div class="member_card_container">
+            <div class="member_card">
+                <button type="button" class="btn btn-primary position-relative">
+                    ENFP
+                    <span
+                        class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                        <i class="fas fa-heart text-white" style="font-size: 0.85rem;"></i>
+                        <span class="visually-hidden">New alerts</span>
+                    </span>
+                </button>
+                <img src="https://github.com/LeeNaYoung240/1BTI_mini-project/assets/107848521/8e9efd4a-1650-4d29-813b-f3e25c338fe9"
+                    alt="이나영">
+                <h3>이나영</h3>
+            </div>
+            <div class="intro_container">
+                <h3>자기소개서</h3>
+                <p>여기에 자기소개서를 작성하세요.</p>
+            </div>
+        </div>
     </div>
 
+    <!-- 댓글 섹션 -->
+    <div class="comments-section">
+        <h3>댓글 💌</h3>
+        <div class="comments-list">
+            <!-- Comments will be dynamically added here -->
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">닉네임 🎫</th>
+                    <th scope="col">댓글 💟</th>
+                </tr>
+            </thead>
+            <tbody id="comment-table-body">
+                <!-- Firestore에서 가져온 댓글이 여기에 추가 -->
+            </tbody>
+            <form id="comment-form">
+                <div class="mb-3">
+                    <label for="name-input" class="form-label">이름</label>
+                    <input type="text" class="form-control" id="name-input" placeholder="이름을 입력하세요...">
+                </div>
+                <div class="mb-3">
+                    <label for="comment-input" class="form-label">댓글</label>
+                    <textarea class="form-control" id="comment-input" rows="4" placeholder="댓글을 입력하세요..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">댓글 작성</button>
+            </form>
+    </div>
 
 </body>
 
