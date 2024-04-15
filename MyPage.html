@@ -39,18 +39,10 @@
             /* 배경 이미지를 커버하는 크기로 설정 */
         }
 
-        
 
-        
         body {
             background-color: white;
         }
-
-       
-
-
-
-    
     </style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -60,17 +52,18 @@
         // Firebase SDK 라이브러리 가져오기
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
-        import { getFirestore, collection, addDoc, getDocs, setDoc,doc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, getDocs, setDoc, doc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
         // Firebase 구성 정보 설정
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
         const firebaseConfig = {
-            apiKey: "",
-            authDomain: "",
-            projectId: "",
-            storageBucket: "",
-            messagingSenderId: "",
-            appId: "",
-            measurementId: ""
+            apiKey: "AIzaSyALOBgwNixaYE3Ckm2rVDAept8DluZ_d1E",
+            authDomain: "bti-fbc0e.firebaseapp.com",
+            projectId: "bti-fbc0e",
+            storageBucket: "bti-fbc0e.appspot.com",
+            messagingSenderId: "547737531654",
+            appId: "1:547737531654:web:9d3670613d4e34a88f9a87",
+            measurementId: "G-BHXZ7XND1Z"
         };
 
         // Firebase 인스턴스 초기화
@@ -78,7 +71,7 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-      
+
     </script>
 </head>
 
@@ -99,7 +92,7 @@
                     <li><a href="#" class="nav-link px-2 text-danger">Home</a></li>
                     <li><a href="#" class="nav-link px-2 text-secondary">Mypage</a></li>
                     <li><a href="#" class="nav-link px-2 text-secondary">설문 하러가기</a></li>
-                   
+
                 </ul>
             </div>
         </div>
@@ -108,7 +101,7 @@
         <h1>1BTI</h1>
 
     </div>
-   
+
 
 </body>
 
