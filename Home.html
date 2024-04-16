@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1BTI:Home</title>
+    <!-- Bootstrap CSS 스타일시트를 가져오기 위한 link 태그. -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- 부트스트랩 -->
+    <style>
+        /*폰트*/
+        @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+
+        * {
+            font-family: "Gowun Dodum", sans-serif;
+        }
+
+
+        .notice_board {
+            display: flex;
+            justify-content: center;
+            /* 자식 요소들을 수평 방향으로 가운데 정렬 */
+            align-items: center;
+            /* 자식 요소들을 수직 방향으로 가운데 정렬 */
+            margin-top: 70px;
+            margin-left: 100px;
+            margin-right: 0px;
+        }
+
+        .notice_board_img {
+            width: 200px;
+            height: auto;
+            margin-right: 20px;
+            /* .notice_board_content와의 오른쪽 간격 설정 */
+            padding: 13px;
+            border-radius: 5px;
+        }
+
+        .logoImage {
+            width: 180px;
+            height: 200px;
+        }
+
+        .notice_board_content {
+            width: 400px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 5px 0px rgb(3, 11, 58);
+            margin-left: 20px;
+            font-family: 'Courier New', Courier, monospace;
+            /* 등고체 계열의 폰트 사용 */
+            line-height: 1.6;
+            /* 줄간격 설정 */
+            position: relative;
+        }
+
+        .notice_board_content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -15px;
+            width: 10px;
+            height: 100%;
+            background-color: #ffffff;
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+            box-shadow: -7px 0px 15px -10px rgba(0, 0, 0, 0.75);
+        }
+
+        body {
+            background-color: white;
+        }
+
+        .member_container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 100px;
+            /* 간격 조절 */
+        }
+
+        .member_card {
+            text-align: center;
+            margin: 0 20px;
+            /* 카드 간격 조절 */
+            width: 250px;
+            /* 카드 너비 */
+            padding: 20px;
+            /* 내용 여백 */
+            border-radius: 10px;
+            /* 모서리 둥글게 */
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+            /* 그림자 */
+            margin: 70px 50px 50px 50px;
+            /* 원하는 간격으로 조정하세요 */
+        }
+
+        .member_card img {
+            width: 150px;
+            /* 이미지 크기 조절 */
+            border-radius: 50%;
+        
+        }
+
+        .member_card h3 {
+            font-size: 2.5rem;
+          
+        }
+
+        .member_card p {
+            font-size: 1.5rem;
+        
+        }
+
+        .team_info {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+            width: 500px;
+            /* 카드를 풀 너비로 설정 */
+            margin-top: 20px;
+            /* 위쪽 여백 추가 */
+            margin-left: auto;
+            /* 왼쪽 여백을 자동으로 설정하여 가운데 정렬 */
+            margin-right: auto;
+            /* 오른쪽 여백을 자동으로 설정하여 가운데 정렬 */
+        }
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="module">
+
+
+        // Firebase SDK 라이브러리 가져오기
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+        import { getFirestore, collection, addDoc, getDocs, setDoc, doc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+        // Firebase 구성 정보 설정
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyALOBgwNixaYE3Ckm2rVDAept8DluZ_d1E",
+            authDomain: "bti-fbc0e.firebaseapp.com",
+            projectId: "bti-fbc0e",
+            storageBucket: "bti-fbc0e.appspot.com",
+            messagingSenderId: "547737531654",
+            appId: "1:547737531654:web:9d3670613d4e34a88f9a87",
+            measurementId: "G-BHXZ7XND1Z"
+        };
+
+        // Firebase 인스턴스 초기화
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+
+    </script>
+</head>
+
+<body>
+    <header class="p-3 text-bg-dark">
+        <!-- 컨테이너를 포함하는 div 요소로 헤더를 감싸줌 -->
+        <div class="container">
+            <!-- flexbox를 사용하여 요소들을 가로로 정렬 -->
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <!-- 로고 링크, 홈으로 이동하는 링크로 설정-->
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+                        <use xlink:href="#bootstrap"></use>
+                    </svg>
+                </a>
+                <img src="https://github.com/LeeNaYoung240/LeeNaYoung240.github.io/assets/107848521/7a88cc7b-a0cc-46ff-b75a-f5be7abb13c2"
+                    alt="팀 로고" width="200" height="150">
+                <!-- 메뉴 목록 -->
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="#" class="nav-link px-2 text-danger">Home</a></li>
+                    <li><a href="#" class="nav-link px-2 text-secondary">Mypage</a></li>
+                    <li><a href="#" class="nav-link px-2 text-secondary">설문 하러가기</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </header>
+    <div class="title_logo">
+
+    </div>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <div class="member_container">
+        <div class="member_card">
+            <button type="button" class="btn btn-primary position-relative">
+                ENFP
+                <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                    <i class="fas fa-heart text-white" style="font-size: 0.85rem;"></i>
+                    <span class="visually-hidden">New alerts</span>
+                </span>
+            </button>
+            <img src="https://github.com/LeeNaYoung240/1BTI_mini-project/assets/107848521/8e9efd4a-1650-4d29-813b-f3e25c338fe9"
+                alt="이나영">
+            <h3>이나영</h3>
+            <p>일 해야조 팀장 이나영입니다👩‍💻</p>
+        </div>
+        <div class="member_card">
+            <img src="멤버2_이미지_주소" alt="조현아">
+            <h3>조현아</h3>
+            <p>멤버2_소개</p>
+        </div>
+        <div class="member_card">
+            <img src="멤버3_이미지_주소" alt="한해정">
+            <h3>한해정</h3>
+            <p>멤버3_소개</p>
+        </div>
+        <div class="member_card">
+            <img src="멤버4_이미지_주소" alt="윤일영">
+            <h3>윤일영</h3>
+            <p>멤버4_소개</p>
+        </div>
+    </div>
+    <div class="member_card team_info">
+        <h3>Team. 1BTI</h3>
+        <p>rule 🚩</p>
+        <p> - 점심 시간 : 13:00 ~ 14:00 </p>
+        <p> - 저녁 시간 : 18:00 ~ 19:00 </p>
+        <p> - 질문하는 것과 받는 것을 두려워 하지 말기 💪 </p>
+        <p> - 질문에 대한 답을 할 때 모두가 이해할 수 있도록 구체적으로 답변해 주기 🤸‍♀️ </p>
+        <p> - 점심, 저녁 식사 메뉴 질문하기 🍳 </p>
+        <p> - 불참할 경우 사전에 공지해 주기(최소 하루 전) ⏰ </p>
+        <p>_ __  __  _ _🖍</p>
+        <!-- 추가적인 정보를 여기에 추가. -->
+    </div>
+</body>
+
+</html>
