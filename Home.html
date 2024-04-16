@@ -17,6 +17,27 @@
             font-family: "Gowun Dodum", sans-serif;
         }
 
+        /*상단의 로고*/
+        .title_logo {
+            height: 100px;
+            /*로고 높이 150*/
+            color: white;
+            /*텍스트 색상 : white*/
+
+            display: flex;
+            /* flexbox 레이아웃을 사용하여 요소를 가운데 정렬 */
+            flex-direction: column;
+            /* 세로 방향으로 배치 */
+            align-items: center;
+            /* 수평과 수직으로 가운데 정렬 */
+            justify-content: center;
+
+            /* 배경 이미지 설정 */
+            background-image: url('https://github.com/LeeNaYoung240/LeeNaYoung240.github.io/assets/107848521/6ec7b3af-603c-49e4-a70e-2144e82c7dc0');
+            background-position: center;
+            background-size: cover;
+            /* 배경 이미지를 커버하는 크기로 설정 */
+        }
 
         .notice_board {
             display: flex;
@@ -95,25 +116,26 @@
             box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
             /* 그림자 */
             margin: 70px 50px 50px 50px;
-            /* 원하는 간격으로 조정하세요 */
+
         }
 
         .member_card img {
-            width: 150px;
+            width: 170px;
             /* 이미지 크기 조절 */
             border-radius: 50%;
-        
+
         }
 
         .member_card h3 {
             font-size: 2.5rem;
-          
+
         }
 
         .member_card p {
             font-size: 1.5rem;
-        
+
         }
+
 
         .team_info {
             background-color: #f8f9fa;
@@ -130,19 +152,48 @@
             margin-right: auto;
             /* 오른쪽 여백을 자동으로 설정하여 가운데 정렬 */
         }
+
+        
+        .support-section {
+            width: 50%;
+            /* 또는 필요에 따라 원하는 너비로 조정 */
+            margin: 20px auto 20px 130px;
+            /* 중앙 정렬을 위해 좌우 여백을 auto로 설정 */
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+
+        .support-list {
+            margin-top: 20px;
+        }
+
+        .support {
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .member_card_container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .intro_container {
+                width: calc(100% - 40px);
+                margin-top: 20px;
+            }
+        }
     </style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="module">
-
-
         // Firebase SDK 라이브러리 가져오기
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
         import { getFirestore, collection, addDoc, getDocs, setDoc, doc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
 
         // Firebase 구성 정보 설정
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
         const firebaseConfig = {
             apiKey: "AIzaSyALOBgwNixaYE3Ckm2rVDAept8DluZ_d1E",
             authDomain: "bti-fbc0e.firebaseapp.com",
@@ -157,7 +208,84 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
+        const database = getDatabase(app);
 
+        // 댓글 데이터베이스 참조
+        const commentsRef = ref(database, 'support');
+
+        // 페이지 로드 시 댓글 로드
+        onValue(commentsRef, (snapshot) => {
+            const support = snapshot.val();
+            displayComments(support);
+        });
+
+
+        function displayComments(support) {
+            const commentsList = document.querySelector('.support-list');
+            commentsList.innerHTML = '';
+            for (const key in support) {
+                const support = support[key];
+                const commentDiv = document.createElement('div');
+                commentDiv.classList.add('support');
+                commentDiv.innerHTML = `
+                <strong>${support.name}</strong>: ${support.message}
+            `;
+                commentsList.appendChild(commentDiv);
+            }
+        }
+
+        document.getElementById('support-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const nameInput = document.getElementById('name-input');
+            const commentInput = document.getElementById('support-input');
+            const name = nameInput.value.trim();
+            const message = commentInput.value.trim();
+            if (name !== '' && message !== '') {
+                try {
+
+                    await addDoc(collection(db, 'support'), {
+                        name: name,
+                        message: message
+                    });
+                    nameInput.value = '';
+                    commentInput.value = '';
+                    alert('댓글 저장 성공!');
+
+                    // 추가 코드: 댓글이 추가되면 새로운 댓글을 불러옴
+                    getDocs(collection(db, 'support')).then((querySnapshot) => {
+                        const support = {};
+                        querySnapshot.forEach((doc) => {
+                            support[doc.id] = doc.data();
+                        });
+                        displayCommentsInTable(support);
+                    });
+                } catch (error) {
+                    console.error('Error addingsupport: ', error);
+                }
+            }
+        });
+        function displayCommentsInTable(support) {
+            const commentTableBody = document.getElementById('support-table-body');
+            commentTableBody.innerHTML = '';
+            for (const key in support) {
+                const comment = support[key];
+                const row = document.createElement('tr');
+                row.innerHTML = `
+            <td>${comment.name}</td>
+            <td>${comment.message}</td>
+        `;
+                commentTableBody.appendChild(row);
+            }
+        }
+
+        // 페이지 로드 시 댓글 로드
+        getDocs(collection(db, 'support')).then((querySnapshot) => {
+            const support = {};
+            querySnapshot.forEach((doc) => {
+                support[doc.id] = doc.data();
+            });
+            displayCommentsInTable(support);
+        });
 
     </script>
 </head>
@@ -195,7 +323,8 @@
         <div class="member_card">
             <button type="button" class="btn btn-primary position-relative">
                 ENFP
-                <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                <span
+                    class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
                     <i class="fas fa-heart text-white" style="font-size: 0.85rem;"></i>
                     <span class="visually-hidden">New alerts</span>
                 </span>
@@ -203,36 +332,100 @@
             <img src="https://github.com/LeeNaYoung240/1BTI_mini-project/assets/107848521/8e9efd4a-1650-4d29-813b-f3e25c338fe9"
                 alt="이나영">
             <h3>이나영</h3>
-            <p>일 해야조 팀장 이나영입니다👩‍💻</p>
+            <p>일 해야조 팀장 이나영입니다!👩‍💻</p>
         </div>
         <div class="member_card">
-            <img src="멤버2_이미지_주소" alt="조현아">
+            <button type="button" class="btn btn-primary position-relative">
+                INFP
+                <span
+                    class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                    <i class="fas fa-heart text-white" style="font-size: 0.85rem;"></i>
+                    <span class="visually-hidden">New alerts</span>
+                </span>
+            </button>
+            <img src="https://github.com/LeeNaYoung240/LeeNaYoung240.github.io/assets/107848521/d9febadb-f84c-473a-ace1-7ce1b0e145fd"
+                alt="조현아">
             <h3>조현아</h3>
-            <p>멤버2_소개</p>
+            <p>응애 나 애기 스무살!</p>
         </div>
         <div class="member_card">
-            <img src="멤버3_이미지_주소" alt="한해정">
+            <button type="button" class="btn btn-primary position-relative">
+                INFJ
+                <span
+                    class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                    <i class="fas fa-heart text-white" style="font-size: 0.85rem;"></i>
+                    <span class="visually-hidden">New alerts</span>
+                </span>
+            </button>
+            <img src="https://github.com/LeeNaYoung240/LeeNaYoung240.github.io/assets/107848521/96f9612c-254a-410e-ab35-71ffdf8e3989"
+                alt="한해정">
             <h3>한해정</h3>
-            <p>멤버3_소개</p>
+            <p>못 먹어도 고!</p>
         </div>
         <div class="member_card">
-            <img src="멤버4_이미지_주소" alt="윤일영">
+            <button type="button" class="btn btn-primary position-relative">
+                INFP
+                <span
+                    class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                    <i class="fas fa-heart text-white" style="font-size: 0.85rem;"></i>
+                    <span class="visually-hidden">New alerts</span>
+                </span>
+            </button>
+            <img src="https://github.com/LeeNaYoung240/LeeNaYoung240.github.io/assets/107848521/96fe076e-eb24-46d9-9b14-346027431f97"
+                alt="윤일영">
             <h3>윤일영</h3>
-            <p>멤버4_소개</p>
+            <p>이모 아님 나름 동안</p>
         </div>
     </div>
-    <div class="member_card team_info">
-        <h3>Team. 1BTI</h3>
-        <p>rule 🚩</p>
-        <p> - 점심 시간 : 13:00 ~ 14:00 </p>
-        <p> - 저녁 시간 : 18:00 ~ 19:00 </p>
-        <p> - 질문하는 것과 받는 것을 두려워 하지 말기 💪 </p>
-        <p> - 질문에 대한 답을 할 때 모두가 이해할 수 있도록 구체적으로 답변해 주기 🤸‍♀️ </p>
-        <p> - 점심, 저녁 식사 메뉴 질문하기 🍳 </p>
-        <p> - 불참할 경우 사전에 공지해 주기(최소 하루 전) ⏰ </p>
-        <p>_ __  __  _ _🖍</p>
-        <!-- 추가적인 정보를 여기에 추가. -->
+    <div class="container">
+        <div class="d-flex flex-wrap justify-content-between">
+            <div class="member_card team_info">
+                <img src="https://github.com/LeeNaYoung240/LeeNaYoung240.github.io/assets/107848521/7a88cc7b-a0cc-46ff-b75a-f5be7abb13c2"
+                    alt="Team. 1BTI">
+                <p>rule 🚩</p>
+                <p> - 점심 시간 : 13:00 ~ 14:00 </p>
+                <p> - 저녁 시간 : 18:00 ~ 19:00 </p>
+                <p> - 질문하는 것과 받는 것을 두려워 하지 말기 </p>
+                <p> - 질문에 대한 답을 할 때 모두가 이해할 수 있도록 구체적으로 답변해 주기 </p>
+                <p> - 점심, 저녁 식사 메뉴 질문하기 </p>
+                <p> - 불참할 경우 사전에 공지해 주기(최소 하루 전) </p>
+                <p>_ __ __ _ _🖍</p>
+                <!-- 추가적인 정보를 여기에 추가. -->
+            </div>
+            <!-- 댓글 섹션 -->
+            <div class="support-section">
+                <h3 style = "text-align:center;">1조를 위한 응원의 한마디 💌</h3>
+                <p style="text-align: center;">😊응원의 한마디는 힘이 됩니다😊</p>
+                <div class="support-list">
+                    <!-- support will be dynamically added here -->
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">닉네임 🎫</th>
+                            <th scope="col">댓글 💟</th>
+                        </tr>
+                    </thead>
+                    <tbody id="support-table-body">
+                        <!-- Firestore에서 가져온 댓글이 여기에 추가 -->
+                    </tbody>
+                    <form id="support-form">
+                        <div class="mb-3">
+                            <label for="name-input" class="form-label">닉네임</label>
+                            <input type="text" class="form-control" id="name-input" placeholder="이름을 입력하세요...">
+                        </div>
+                        <div class="mb-3">
+                            <label for="support-input" class="form-label">댓글</label>
+                            <textarea class="form-control" id="support-input" rows="4"
+                                placeholder="댓글을 입력하세요..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">댓글 작성</button>
+                    </form>
+            </div>
+        </div>
     </div>
+
+
 </body>
 
 </html>
