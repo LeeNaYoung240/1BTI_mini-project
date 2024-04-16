@@ -40,9 +40,9 @@
             /* 배경 이미지를 커버하는 크기로 설정 */
         }
 
-        
 
-    
+
+
         body {
             background-color: white;
         }
@@ -53,10 +53,10 @@
             border-radius: 10px;
         }
 
-        h1 , p {
+        h1,
+        p {
             color: black;
         }
-       
     </style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -66,25 +66,93 @@
         // Firebase SDK 라이브러리 가져오기
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
-        import { getFirestore, collection, addDoc, getDocs, setDoc,doc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, getDocs, setDoc, doc, query, where } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js";
 
         // Firebase 구성 정보 설정
         const firebaseConfig = {
-            apiKey: "",
-            authDomain: "",
-            projectId: "",
-            storageBucket: "",
-            messagingSenderId: "",
-            appId: "",
-            measurementId: ""
+            apiKey: "AIzaSyCzIX5h8SwGdDyZLsjja-eN-BwFutMGkvY",
+            authDomain: "sparta-26114.firebaseapp.com",
+            projectId: "sparta-26114",
+            storageBucket: "sparta-26114.appspot.com",
+            messagingSenderId: "218194191462",
+            appId: "1:218194191462:web:647832dcba096f347eb9a7",
+            measurementId: "G-JGP1CSZ3GR"
         };
 
         // Firebase 인스턴스 초기화
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
+        const storage = getStorage(app);
 
-      
+
+        // 모달창 팀원 추가 등록 저장하기 버튼 클릭 시 
+        $("#saveAddteam").click(async function () {
+
+            let inputName = $('#inputName').val();
+            let inputIntro = $('#inputIntro').val();
+            let inputHobby = $('#inputHobby').val();
+            let inputMbti = $('#inputMbti').val();
+            let inputAdv = $('#inputAdv').val();
+            let inputDis = $('#inputDis').val();
+            let inputNickname = $('#inputNickname').val();
+            let inputMotto = $('#inputMotto').val();
+            let uploadPhoto = $('#uploadPhoto').val();
+
+            // firebase storage에 이미지 저장
+            let file = $('#uploadPhoto').prop('files')[0];
+            let storageRef = ref(storage, 'photos/' + file.name);
+
+            const teamMembersCollection = collection(db, 'teamMembers');
+
+            // 동일한 이름이 있는 지 확인
+            const querySnapshot = await getDocs(query(teamMembersCollection, where("Name", "==", inputName)));
+            if (!querySnapshot.empty) {
+                alert("이미 존재하는 이름이에요. 이름 옆에다가 A를 붙여주세요♥");
+                return;
+            }
+
+            try {
+                await uploadBytes(storageRef, file);
+
+                //firebase storage 에 이미지 저장할 url 생성
+                let photoURL = `https://storage.googleapis.com/${firebaseConfig.storageBucket}/photos/${file.name}`;
+
+
+                await setDoc(doc(teamMembersCollection, inputName), {
+                    Name: inputName,
+                    Intro: inputIntro,
+                    Hobby: inputHobby,
+                    Mbti: inputMbti,
+                    Adv: inputAdv,
+                    Dis: inputDis,
+                    Nickname: inputNickname,
+                    Motto: inputMotto,
+                    PhotoURL: photoURL 
+                });
+
+                // Clear the form fields after successful submission
+                $('#inputName').val('');
+                $('#inputIntro').val('');
+                $('#inputHobby').val('');
+                $('#inputMbti').val('');
+                $('#inputAdv').val('');
+                $('#inputDis').val('');
+                $('#inputNickname').val('');
+                $('#inputMotto').val('');
+                $('#uploadPhoto').val('');
+
+                alert('축하합니다♥ 팀원으로 등록되었어요!');
+                window.location.reload();
+            } catch (error) {
+                console.error("무엇이 error인가 : ", error);
+                alert('저장에 실패하였어요.');
+            }
+
+
+        });
+
     </script>
 </head>
 
@@ -105,7 +173,8 @@
                     <li><a href="#" class="nav-link px-2 text-danger">Home</a></li>
                     <li><a href="#" class="nav-link px-2 text-secondary">Mypage</a></li>
                     <li><a href="#" class="nav-link px-2 text-secondary">설문 하러가기</a></li>
-                   
+                    <li><a href="#" class="nav-link px-2 text-secondary" data-bs-toggle="modal"
+                            data-bs-target="#addTeamModal">팀원 등록하기</a></li>
                 </ul>
             </div>
         </div>
@@ -114,64 +183,119 @@
         <h1>1BTI</h1>
     </div>
 
-    <!-- carousel -->
-    <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class=""
-                aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"
-                class=""></button>
-            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3" class="active"
-                aria-current="true"></button>
-        </div>
-        <div class="carousel-inner">
-            <div class="carousel-item">
-                <svg class="bd-placeholder-img" width="100%" height="500px" xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                    <rect width="100%" height="100%" fill="#BCA37F"></rect>
-                </svg>
-                <div class="container">
-                    <div class="carousel-caption text-start">
-                        <div class="image">
-                            <img align="left"
-                                src="https://i.namu.wiki/i/XnXRINhcCyXyRPqwM978u8a0w95g79oHYHjXfmG1FIGzT7A-s_cyjXKcN-JWEXiq7vEkiuyviPSwvxyN9R81_IXdQrT4F2f8hhLL4nbKykg7d1g0yFMIRBT4JtnQ8qjit2kRRqqx-v0hIdIEKDD6zA.webp"
-                                style="width:400px; height:400px;">
+    <div class="main">
+        <!-- 새로운 팀원추가 Modal창 -->
+        <div class="modal fade" id="addTeamModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalTitle">팀원 추가</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="inputName" placeholder="이름">
+                            <label for="floatingInput">이름</label>
                         </div>
-                        <h1>나는 강아지다</h1>
-                        <p class="opacity-75">나의 MBTI의 맞춰봐!</p>
-                        <p><a class="btn btn-lg btn-primary" href="#">Are you curious?</a></p>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="inputIntro" placeholder="한줄 소개">
+                            <label for="floatingInput">한 줄 소개</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="inputHobby" placeholder="취미">
+                            <label for="floatingInput">취미</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="inputMbti" placeholder="MBTI">
+                            <label for="floatingInput">MBTI</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="inputAdv" placeholder="장점">
+                            <label for="floatingInput">성격의 장점</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="inputDis" placeholder="단점">
+                            <label for="floatingInput">성격의 단점</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="inputNickname" placeholder="별명">
+                            <label for="floatingInput">별명</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="inputMotto" placeholder="좌우명">
+                            <label for="floatingInput">좌우명</label>
+                        </div>
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="inputGroupFile01">나의 사진</label>
+                            <input type="file" class="form-control" id="uploadPhoto">
+                        </div>
+                        <div class="modal-footer">
+                            <button id="saveAddteam" type="button" class="btn btn-primary">저장하기</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="carousel-item active">
-                <svg class="bd-placeholder-img" width="100%" height="500px" xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                    <rect width="100%" height="100%" fill="#BCA37F"></rect>
-                </svg>
-                <div class="container">
-                    <div class="carousel-caption text-end">
-                        <div class="image">
-                            <img align="right"
-                                src="https://image.newsis.com/2023/07/12/NISI20230712_0001313626_web.jpg"
-                                style="width:400px; height:400px;">
+        </div>
+
+
+        <!-- carousel -->
+        <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class=""
+                    aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"
+                    class=""></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"
+                    class="active" aria-current="true"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item">
+                    <svg class="bd-placeholder-img" width="100%" height="500px" xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <rect width="100%" height="100%" fill="#BCA37F"></rect>
+                    </svg>
+                    <div class="container">
+                        <div class="carousel-caption text-start">
+                            <div class="image">
+                                <img align="left"
+                                    src="https://github.com/LeeNaYoung240/1BTI_mini-project/assets/107848521/8e9efd4a-1650-4d29-813b-f3e25c338fe9"
+                                    alt="이나영" style="width:350px; height:400px;">
+                            </div>
+                            <h1>이나영</h1>
+                            <p>일 해야조 팀장 이나영입니다👩‍💻</p>
+                            <p><a class="btn btn-lg btn-primary" href="#">Are you curious?</a></p>
                         </div>
-                        <h1>나는 고양이다</h1>
-                        <p>나의 MBTI를 맞춰봐!</p>
-                        <p><a class="btn btn-lg btn-primary" href="#">Are you curious?</a></p>
+                    </div>
+                </div>
+                <div class="carousel-item active">
+                    <svg class="bd-placeholder-img" width="100%" height="500px" xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <rect width="100%" height="100%" fill="#BCA37F"></rect>
+                    </svg>
+                    <div class="container">
+                        <div class="carousel-caption text-end">
+                            <div class="image">
+                                <img align="right"
+                                    src="https://velog.velcdn.com/images/hanni705/post/49255a6a-74f3-4612-be5b-f2a1c9c69f14/image.jpg"
+                                    alt="한해정" style="width:400px; height:400px;">
+                            </div>
+                            <h1>한해정</h1>
+                            <p>일 해야조 팀원 한해정입니다</p>
+                            <p><a class="btn btn-lg btn-primary" href="#">Are you curious?</a></p>
+                        </div>
                     </div>
                 </div>
             </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-   
+
 
 </body>
 
