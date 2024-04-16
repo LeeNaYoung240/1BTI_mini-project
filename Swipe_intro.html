@@ -51,7 +51,7 @@
             background-color: white;
         }
 
-        .image > img {
+        .image>img {
             border-radius: 10px;
             box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
         }
@@ -66,7 +66,6 @@
             text-align: center;
             color: black;
         }
-
     </style>
 
 
@@ -83,23 +82,22 @@
 
         // Firebase 구성 정보 설정
         const firebaseConfig = {
-            apiKey: "AIzaSyALOBgwNixaYE3Ckm2rVDAept8DluZ_d1E",
-            authDomain: "bti-fbc0e.firebaseapp.com",
-            projectId: "bti-fbc0e",
-            storageBucket: "bti-fbc0e.appspot.com",
-            messagingSenderId: "547737531654",
-            appId: "1:547737531654:web:9d3670613d4e34a88f9a87",
-            measurementId: "G-BHXZ7XND1Z"
+            apiKey: "AIzaSyCzIX5h8SwGdDyZLsjja-eN-BwFutMGkvY",
+            authDomain: "sparta-26114.firebaseapp.com",
+            projectId: "sparta-26114",
+            storageBucket: "sparta-26114.appspot.com",
+            messagingSenderId: "218194191462",
+            appId: "1:218194191462:web:647832dcba096f347eb9a7",
+            measurementId: "G-JGP1CSZ3GR"
         };
 
         // Firebase 인스턴스 초기화
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
-        const database = getDatabase(app);
         const storage = getStorage(app);
 
-        // 모달창 팀원 추가 등록 저장하기 버튼 클릭 시 
+        // 모달창 팀원 추가 등록 저장
         $("#saveAddteam").click(async function () {
 
             let inputName = $('#inputName').val();
@@ -114,6 +112,11 @@
 
             // firebase storage에 이미지 저장
             let file = $('#uploadPhoto').prop('files')[0];
+            if (!file) {
+                alert("파일을 선택해주세요. ");
+                return;
+            }
+
             let storageRef = ref(storage, 'photos/' + file.name);
 
             const teamMembersCollection = collection(db, 'teamMembers');
@@ -144,7 +147,6 @@
                     PhotoURL: photoURL
                 });
 
-                // Clear the form fields after successful submission
                 $('#inputName').val('');
                 $('#inputIntro').val('');
                 $('#inputHobby').val('');
@@ -162,8 +164,72 @@
                 alert('저장에 실패하였어요.');
             }
 
-
         });
+
+        $(document).ready(async function () {
+            // 팀원 저장내용 불러오기
+            let docs = await getDocs(collection(db, "teamMembers"));
+
+            let inputNameArray = [];
+            let inputIntroArray = [];
+            let inputHobbyArray = [];
+            let inputMbtiArray = [];
+            let inputAdvArray = [];
+            let inputDisArray = [];
+            let inputNickNameArray = [];
+            let inputMottoArray = [];
+            let photoURLArray = [];
+
+            docs.forEach((doc) => {
+                let row = doc.data();
+
+                let inputName = row['Name'];
+                let inputIntro = row['inputIntro'];
+                let inputHobby = row['Hobby'];
+                let inputMbti = row['Mbti'];
+                let inputAdv = row['Adv'];
+                let inputDis = row['Dis'];
+                let inputNickname = row['Nickname'];
+                let inputMotto = row['Motto'];
+                let photoURL = row['PhotoURL'];
+                inputHobbyArray.push(inputName, inputIntro, inputHobby, inputMbti, inputAdv, inputDis, inputName, inputMotto, photoURL);
+            });
+
+    
+        let temp_html = `
+        <div class="container">
+            <div class="carousel-caption">
+                <div class="image">
+                    <img align="left" src="${photoURL}" alt="${inputName}" style="width:400px; height:400px;">
+                </div>
+                <div class="intro_container">
+                    <h1>${inputName}</h1>
+                    <div class="mbtiBtn">
+                        <button type="button" class="btn btn-primary position-relative">${inputMbti}
+                            <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                                <i class="fas fa-heart text-white" style="font-size: 0.85rem;"></i>
+                                <span class="visually-hidden">New alerts</span>
+                            </span>
+                        </button>
+                    </div>
+                    <h3>자기소개서 💁‍♀️</h3>
+                    <p> 한 줄 키워드 : ${inputIntro}</p>
+                    <p> 취미 : ${inputHobby}</p>
+                    <p> MBTI : ${inputMbti}</p>
+                    <p> 장점 : ${inputAdv}</p>
+                    <p> 단점 : ${inputDis}</p>
+                    <p> 별명 : ${inputNickname}</p>
+                    <p> 좌우명 : ${inputMotto}</p>
+                    <p><a class="btn btn-lg btn-primary" href="#">Make a comment</a></p>
+                </div>
+            </div>
+        </div>
+    </div>`;
+        $('.carousel-inner').append(temp_html);
+
+    );
+
+
     </script>
 </head>
 
@@ -192,7 +258,7 @@
             </div>
         </div>
     </header>
-   
+
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <div class="main">
@@ -251,7 +317,7 @@
 
 
         <!-- carousel -->
-        <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
+        <div id="myCarousel" class="carousel slide mb-7" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" aria-label="Slide 1"
                     class=""></button>
@@ -260,10 +326,51 @@
                 <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"
                     class=""></button>
                 <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3" aria-label="Slide 4"
+                    class=""></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="4" aria-label="Slide 5"
                     class="active" aria-current="true"></button>
             </div>
 
+
+
             <div class="carousel-inner">
+                <div class="carousel-item">
+                    <svg class="bd-placeholder-img" width="100%" height="600px" xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <rect width="100%" height="100%" fill="#D6E6F2"></rect>
+                    </svg>
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <div class="image">
+                                <img align="left" src="" alt="" style="width:400px; height:400px;">
+                            </div>
+                            <div class="intro_container">
+                                <h1></h1>
+
+                                <div class="mbtiBtn">
+                                    <button type="button" class="btn btn-primary position-relative">
+                                        <span
+                                            class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                                            <i class="fas fa-heart text-white" style="font-size: 0.85rem;"></i>
+                                            <span class="visually-hidden">New alerts</span>
+                                        </span>
+                                    </button>
+                                </div>
+
+                                <h3>자기소개서 💁‍♀️</h3>
+                                <p> 한 줄 키워드 : /p>
+                                <p> 취미 : </p>
+                                <p> MBTI : </p>
+                                <p> 장점 : </p>
+                                <p> 단점 : </p>
+                                <p> 별명 : </p>
+                                <p> 좌우명 : </p>
+
+                                <p><a class="btn btn-lg btn-primary" href="#">Make a comment</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="carousel-item">
                     <svg class="bd-placeholder-img" width="100%" height="600px" xmlns="http://www.w3.org/2000/svg"
                         aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
