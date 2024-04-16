@@ -42,9 +42,10 @@
         body {
             background-color: white;
         }
-        .result_card{
+
+        .result_card {
             width: auto;
-            height:800px;
+            height: 800px;
             background-color: rgba(240, 248, 255, 0.667);
         }
 
@@ -118,20 +119,22 @@
 
         // Firebase 구성 정보 설정
         const firebaseConfig = {
-            apiKey: "",
-            authDomain: "",
-            projectId: "",
-            storageBucket: "",
-            messagingSenderId: "",
-            appId: "",
-            measurementId: ""
+            apiKey: "AIzaSyALOBgwNixaYE3Ckm2rVDAept8DluZ_d1E",
+            authDomain: "bti-fbc0e.firebaseapp.com",
+            projectId: "bti-fbc0e",
+            storageBucket: "bti-fbc0e.appspot.com",
+            messagingSenderId: "547737531654",
+            appId: "1:547737531654:web:9d3670613d4e34a88f9a87",
+            measurementId: "G-BHXZ7XND1Z"
         };
+
 
         // Firebase 인스턴스 초기화
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
-
+        
+        
 
     </script>
     <script type="module" src="./script.js"></script>
