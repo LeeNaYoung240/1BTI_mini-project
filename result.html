@@ -92,19 +92,25 @@
             flex-direction: row;
             justify-content: center;
             text-align: center;
-            scale: 150%;
         }
+
 
         .button>.btn-primary1 {
             background-color: lightblue;
             border-color: transparent;
             margin: 10px;
+            width: 200px;
+            height: 50px;
+            font-size:large;
         }
 
         .button>.btn-primary2 {
             background-color: lightcoral;
             border-color: transparent;
             margin: 10px;
+            width: 200px;
+            height: 50px;
+            font-size:large
         }
     </style>
 
@@ -157,8 +163,8 @@
                 <!-- 메뉴 목록 -->
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li><a href="Home.html" class="nav-link px-2 text-danger">Home</a></li>
-                    <li><a href="#" class="nav-link px-2 text-secondary">Mypage</a></li>
-                    <li><a href="#" class="nav-link px-2 text-secondary">설문 하러가기</a></li>
+                    <li><a href="" class="nav-link px-2 text-secondary">Mypage</a></li>
+                    <li><a href="question1.html" class="nav-link px-2 text-secondary">설문 하러가기</a></li>
 
                 </ul>
             </div>
@@ -168,7 +174,7 @@
     <div class="result_card">
         <div class="result">
             <div class="card-body">
-                <img src="./image_1.jpg" class="res_img" id="res_img">
+                <img src="./image_1.jpg" class="res_img" id="res_img"><h4>사진을 클릭해보세요!</h4> 
                 <p>
                 <h1 class="card-title">당신은 <a class="result_name" id="result_name"></a> 와 잘 맞습니다!</h1>
                 </p><br>
@@ -182,7 +188,7 @@
             </div>
         </div>
         <div class="button">
-            <a class="btn btn-primary1" href="#" role="button">다른 팀원도 보러가기</a>
+            <a class="btn btn-primary1" href="Home.html" role="button">다른 팀원도 보러가기</a>
             <a class="btn btn-primary2" href="#" role="button">질문별 답변 보러가기</a>
         </div>
     </div>
