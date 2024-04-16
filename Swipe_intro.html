@@ -51,7 +51,7 @@
             background-color: white;
         }
 
-        .image>img {
+        .image > img {
             border-radius: 10px;
             box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
         }
@@ -66,6 +66,7 @@
             text-align: center;
             color: black;
         }
+
     </style>
 
 
@@ -82,22 +83,23 @@
 
         // Firebase 구성 정보 설정
         const firebaseConfig = {
-            apiKey: "AIzaSyCzIX5h8SwGdDyZLsjja-eN-BwFutMGkvY",
-            authDomain: "sparta-26114.firebaseapp.com",
-            projectId: "sparta-26114",
-            storageBucket: "sparta-26114.appspot.com",
-            messagingSenderId: "218194191462",
-            appId: "1:218194191462:web:647832dcba096f347eb9a7",
-            measurementId: "G-JGP1CSZ3GR"
+            apiKey: "AIzaSyALOBgwNixaYE3Ckm2rVDAept8DluZ_d1E",
+            authDomain: "bti-fbc0e.firebaseapp.com",
+            projectId: "bti-fbc0e",
+            storageBucket: "bti-fbc0e.appspot.com",
+            messagingSenderId: "547737531654",
+            appId: "1:547737531654:web:9d3670613d4e34a88f9a87",
+            measurementId: "G-BHXZ7XND1Z"
         };
 
         // Firebase 인스턴스 초기화
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
+        const database = getDatabase(app);
         const storage = getStorage(app);
 
-        // 모달창 팀원 추가 등록 저장
+        // 모달창 팀원 추가 등록 저장하기 버튼 클릭 시 
         $("#saveAddteam").click(async function () {
 
             let inputName = $('#inputName').val();
@@ -112,11 +114,6 @@
 
             // firebase storage에 이미지 저장
             let file = $('#uploadPhoto').prop('files')[0];
-            if (!file) {
-                alert("파일을 선택해주세요. ");
-                return;
-            }
-
             let storageRef = ref(storage, 'photos/' + file.name);
 
             const teamMembersCollection = collection(db, 'teamMembers');
@@ -124,7 +121,7 @@
             // 동일한 이름이 있는 지 확인
             const querySnapshot = await getDocs(query(teamMembersCollection, where("Name", "==", inputName)));
             if (!querySnapshot.empty) {
-                alert("이미 존재하는 이름이에요. 이름 옆에다가 A를 붙여주세요♥");
+                alert("이미 존재하는 이름이에요. 이름 옆에 A를 붙여주세요.");
                 return;
             }
 
@@ -144,7 +141,7 @@
                     Dis: inputDis,
                     Nickname: inputNickname,
                     Motto: inputMotto,
-                    PhotoURL: photoURL
+                    PhotoURL: photoURL,
                 });
 
                 $('#inputName').val('');
@@ -157,32 +154,21 @@
                 $('#inputMotto').val('');
                 $('#uploadPhoto').val('');
 
-                alert('축하합니다♥ 팀원으로 등록되었어요!');
+                alert('축하합니다. 팀원으로 등록되었어요!');
                 window.location.reload();
             } catch (error) {
-                console.error("무엇이 error인가 : ", error);
+                // console.error("무엇이 error인가 : ", error);
                 alert('저장에 실패하였어요.');
             }
-
         });
 
         $(document).ready(async function () {
             // 팀원 저장내용 불러오기
             let docs = await getDocs(collection(db, "teamMembers"));
-
-            let inputNameArray = [];
-            let inputIntroArray = [];
-            let inputHobbyArray = [];
-            let inputMbtiArray = [];
-            let inputAdvArray = [];
-            let inputDisArray = [];
-            let inputNickNameArray = [];
-            let inputMottoArray = [];
-            let photoURLArray = [];
-
+            
+            let num = 0;
             docs.forEach((doc) => {
                 let row = doc.data();
-
                 let inputName = row['Name'];
                 let inputIntro = row['inputIntro'];
                 let inputHobby = row['Hobby'];
@@ -192,15 +178,12 @@
                 let inputNickname = row['Nickname'];
                 let inputMotto = row['Motto'];
                 let photoURL = row['PhotoURL'];
-                inputHobbyArray.push(inputName, inputIntro, inputHobby, inputMbti, inputAdv, inputDis, inputName, inputMotto, photoURL);
-            });
 
-    
-        let temp_html = `
+                let temp_html = `
         <div class="container">
             <div class="carousel-caption">
                 <div class="image">
-                    <img align="left" src="${photoURL}" alt="${inputName}" style="width:400px; height:400px;">
+                    <img align="left" src="${photoURL}" alt="${inputName}" style="width:400px;">
                 </div>
                 <div class="intro_container">
                     <h1>${inputName}</h1>
@@ -225,9 +208,10 @@
             </div>
         </div>
     </div>`;
-        $('.carousel-inner').append(temp_html);
-
-    );
+                num++;
+                $(`#carousel-${num}`).append(temp_html);
+            });
+        })
 
 
     </script>
@@ -258,7 +242,7 @@
             </div>
         </div>
     </header>
-
+   
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <div class="main">
@@ -317,7 +301,7 @@
 
 
         <!-- carousel -->
-        <div id="myCarousel" class="carousel slide mb-7" data-bs-ride="carousel">
+        <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" aria-label="Slide 1"
                     class=""></button>
@@ -326,12 +310,8 @@
                 <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"
                     class=""></button>
                 <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3" aria-label="Slide 4"
-                    class=""></button>
-                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="4" aria-label="Slide 5"
                     class="active" aria-current="true"></button>
             </div>
-
-
 
             <div class="carousel-inner">
                 <div class="carousel-item">
@@ -342,46 +322,9 @@
                     <div class="container">
                         <div class="carousel-caption">
                             <div class="image">
-                                <img align="left" src="" alt="" style="width:400px; height:400px;">
-                            </div>
-                            <div class="intro_container">
-                                <h1></h1>
-
-                                <div class="mbtiBtn">
-                                    <button type="button" class="btn btn-primary position-relative">
-                                        <span
-                                            class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
-                                            <i class="fas fa-heart text-white" style="font-size: 0.85rem;"></i>
-                                            <span class="visually-hidden">New alerts</span>
-                                        </span>
-                                    </button>
-                                </div>
-
-                                <h3>자기소개서 💁‍♀️</h3>
-                                <p> 한 줄 키워드 : /p>
-                                <p> 취미 : </p>
-                                <p> MBTI : </p>
-                                <p> 장점 : </p>
-                                <p> 단점 : </p>
-                                <p> 별명 : </p>
-                                <p> 좌우명 : </p>
-
-                                <p><a class="btn btn-lg btn-primary" href="#">Make a comment</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <svg class="bd-placeholder-img" width="100%" height="600px" xmlns="http://www.w3.org/2000/svg"
-                        aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <rect width="100%" height="100%" fill="#D6E6F2"></rect>
-                    </svg>
-                    <div class="container">
-                        <div class="carousel-caption">
-                            <div class="image">
                                 <img align="left"
                                     src="https://github.com/LeeNaYoung240/1BTI_mini-project/assets/107848521/8e9efd4a-1650-4d29-813b-f3e25c338fe9"
-                                    alt="이나영" style="width:400px; height:400px;">
+                                    alt="이나영" style="width:400px;">
                             </div>
                             <div class="intro_container">
                                 <h1>이나영</h1>
@@ -421,7 +364,7 @@
                             <div class="image">
                                 <img align="left"
                                     src="https://github.com/LeeNaYoung240/LeeNaYoung240.github.io/assets/107848521/96f9612c-254a-410e-ab35-71ffdf8e3989"
-                                    alt="한해정" style="width:400px; height:400px;">
+                                    alt="한해정" style="width:400px;">
                             </div>
                             <div class="intro_container">
                                 <h1>한해정</h1>
@@ -460,7 +403,7 @@
                             <div class="image">
                                 <img align="left"
                                     src="https://github.com/LeeNaYoung240/LeeNaYoung240.github.io/assets/107848521/96fe076e-eb24-46d9-9b14-346027431f97"
-                                    alt="윤일영" style="width:400px; height:400px;">
+                                    alt="윤일영" style="width:400px;">
                             </div>
                             <div class="intro_container">
                                 <h1>윤일영</h1>
@@ -499,7 +442,7 @@
                             <div class="image">
                                 <img align="left"
                                     src="https://github.com/LeeNaYoung240/LeeNaYoung240.github.io/assets/107848521/d9febadb-f84c-473a-ace1-7ce1b0e145fd"
-                                    alt="조현아" style="width:400px; height:400px;">
+                                    alt="조현아" style="width:400px;">
                             </div>
                             <div class="intro_container">
                                 <h1>조현아</h1>
