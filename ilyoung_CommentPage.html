@@ -173,7 +173,7 @@
         const database = getDatabase(app);
 
         // 댓글 데이터베이스 참조
-        const commentsRef = ref(database, 'comments');
+        const commentsRef = ref(database, 'ilyoungcomments');
 
         // 페이지 로드 시 댓글 로드
         onValue(commentsRef, (snapshot) => {
@@ -188,7 +188,7 @@
             for (const key in comments) {
                 const comment = comments[key];
                 const commentDiv = document.createElement('div');
-                commentDiv.classList.add('comment');
+                commentDiv.classList.add('ilyoungcomments');
                 commentDiv.innerHTML = `
                     <strong>${comment.name}</strong>: ${comment.message}
                 `;
@@ -205,7 +205,7 @@
             if (name !== '' && message !== '') {
                 try {
 
-                    await addDoc(collection(db, 'comments'), {
+                    await addDoc(collection(db, 'ilyoungcomments'), {
                         name: name,
                         message: message
                     });
@@ -214,7 +214,7 @@
                     alert('댓글 저장 성공!');
 
                     // 추가 코드: 댓글이 추가되면 새로운 댓글을 불러옴
-                    getDocs(collection(db, 'comments')).then((querySnapshot) => {
+                    getDocs(collection(db, 'ilyoungcomments')).then((querySnapshot) => {
                         const comments = {};
                         querySnapshot.forEach((doc) => {
                             comments[doc.id] = doc.data();
@@ -241,7 +241,7 @@
         }
 
         // 페이지 로드 시 댓글 로드
-        getDocs(collection(db, 'comments')).then((querySnapshot) => {
+        getDocs(collection(db, 'ilyoungcomments')).then((querySnapshot) => {
             const comments = {};
             querySnapshot.forEach((doc) => {
                 comments[doc.id] = doc.data();
@@ -282,26 +282,26 @@
         <div class="member_card_container">
             <div class="member_card">
                 <button type="button" class="btn btn-primary position-relative">
-                    ENFP
+                    INFP
                     <span
                         class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
                         <i class="fas fa-heart text-white" style="font-size: 0.85rem;"></i>
                         <span class="visually-hidden">New alerts</span>
                     </span>
                 </button>
-                <img src="https://github.com/LeeNaYoung240/1BTI_mini-project/assets/107848521/8e9efd4a-1650-4d29-813b-f3e25c338fe9"
-                    alt="이나영">
-                <h3>이나영</h3>
+                <img src="https://github.com/LeeNaYoung240/LeeNaYoung240.github.io/assets/107848521/96fe076e-eb24-46d9-9b14-346027431f97"
+                    alt="윤일영">
+                <h3>윤일영</h3>
             </div>
             <div class="intro_container">
                 <h3>자기소개서 💁‍♀️</h3>
-                <p> 한 줄 키워드 : 재미 빼면 시체 ☠</p>
-                <p> 취미 : 강아지 산책🐶, 웹툰 📃</p>
-                <p> MBTI : ENFP</p>
-                <p> 장점 : 밤새 고민할 수 있는 끈기 💪</p>
-                <p> 단점 : 수동적인 성격, 감정에 지배적 🤸‍♀️</p>
-                <p> 별명 : 영나이 </p>
-                <p> 좌우명 : 그 여정이 바로 보상이다. 🎈 </p>
+                <p> 한 줄 키워드 : 이모 아님 나름 동안 👧</p>
+                <p> 취미 : 음악감상 🎼</p>
+                <p> MBTI : INFP</p>
+                <p> 장점 : 집중력, 꼼꼼함 💡</p>
+                <p> 단점 : 게으름, 부정적 💦</p>
+                <p> 별명 : 씹프피, 찐따 🤓</p>
+              
             </div>
         </div>
     </div>
