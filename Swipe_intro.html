@@ -180,9 +180,9 @@
             let inputMottoArray = [];
             let photoURLArray = [];
 
+            let num = 0;
             docs.forEach((doc) => {
                 let row = doc.data();
-
                 let inputName = row['Name'];
                 let inputIntro = row['inputIntro'];
                 let inputHobby = row['Hobby'];
@@ -193,14 +193,12 @@
                 let inputMotto = row['Motto'];
                 let photoURL = row['PhotoURL'];
                 inputHobbyArray.push(inputName, inputIntro, inputHobby, inputMbti, inputAdv, inputDis, inputName, inputMotto, photoURL);
-            });
 
-    
-        let temp_html = `
+                let temp_html = `
         <div class="container">
             <div class="carousel-caption">
                 <div class="image">
-                    <img align="left" src="${photoURL}" alt="${inputName}" style="width:400px; height:400px;">
+                    <img align="left" src="${photoURL}" alt="${inputName}" style="width:400px;">
                 </div>
                 <div class="intro_container">
                     <h1>${inputName}</h1>
@@ -225,9 +223,10 @@
             </div>
         </div>
     </div>`;
-        $('.carousel-inner').append(temp_html);
-
-    );
+                num++;
+                $(`#carousel-${num}`).append(temp_html);
+            });
+        })
 
 
     </script>
@@ -339,204 +338,177 @@
                         aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
                         <rect width="100%" height="100%" fill="#D6E6F2"></rect>
                     </svg>
-                    <div class="container">
+                    <div class="container" id="carousel-1">
                         <div class="carousel-caption">
-                            <div class="image">
-                                <img align="left" src="" alt="" style="width:400px; height:400px;">
-                            </div>
-                            <div class="intro_container">
-                                <h1></h1>
-
-                                <div class="mbtiBtn">
-                                    <button type="button" class="btn btn-primary position-relative">
-                                        <span
-                                            class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
-                                            <i class="fas fa-heart text-white" style="font-size: 0.85rem;"></i>
-                                            <span class="visually-hidden">New alerts</span>
-                                        </span>
-                                    </button>
+                        </div>
+                    </div>
+                </div>
+                    <div class="carousel-item">
+                        <svg class="bd-placeholder-img" width="100%" height="600px" xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                            <rect width="100%" height="100%" fill="#D6E6F2"></rect>
+                        </svg>
+                        <div class="container">
+                            <div class="carousel-caption">
+                                <div class="image">
+                                    <img align="left"
+                                        src="https://github.com/LeeNaYoung240/1BTI_mini-project/assets/107848521/8e9efd4a-1650-4d29-813b-f3e25c338fe9"
+                                        alt="이나영" style="width:400px;">
                                 </div>
+                                <div class="intro_container">
+                                    <h1>이나영</h1>
 
-                                <h3>자기소개서 💁‍♀️</h3>
-                                <p> 한 줄 키워드 : /p>
-                                <p> 취미 : </p>
-                                <p> MBTI : </p>
-                                <p> 장점 : </p>
-                                <p> 단점 : </p>
-                                <p> 별명 : </p>
-                                <p> 좌우명 : </p>
+                                    <div class="mbtiBtn">
+                                        <button type="button" class="btn btn-primary position-relative">ENFP
+                                            <span
+                                                class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                                                <i class="fas fa-heart text-white" style="font-size: 0.85rem;"></i>
+                                                <span class="visually-hidden">New alerts</span>
+                                            </span>
+                                        </button>
+                                    </div>
 
-                                <p><a class="btn btn-lg btn-primary" href="#">Make a comment</a></p>
+                                    <h3>자기소개서 💁‍♀️</h3>
+                                    <p> 한 줄 키워드 : 재미 빼면 시체 ☠</p>
+                                    <p> 취미 : 강아지 산책🐶, 웹툰 📃</p>
+                                    <p> MBTI : ENFP</p>
+                                    <p> 장점 : 밤새 고민할 수 있는 끈기 💪</p>
+                                    <p> 단점 : 수동적인 성격, 감정에 지배적 🤸‍♀️</p>
+                                    <p> 별명 : 영나이 </p>
+                                    <p> 좌우명 : 그 여정이 바로 보상이다. 🎈 </p>
+
+                                    <p><a class="btn btn-lg btn-primary" href="#">Make a comment</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <svg class="bd-placeholder-img" width="100%" height="600px" xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                            <rect width="100%" height="100%" fill="#D6E6F2"></rect>
+                        </svg>
+                        <div class="container">
+                            <div class="carousel-caption">
+                                <div class="image">
+                                    <img align="left"
+                                        src="https://github.com/LeeNaYoung240/LeeNaYoung240.github.io/assets/107848521/96f9612c-254a-410e-ab35-71ffdf8e3989"
+                                        alt="한해정" style="width:400px;">
+                                </div>
+                                <div class="intro_container">
+                                    <h1>한해정</h1>
+
+                                    <div class="mbtiBtn">
+                                        <button type="button" class="btn btn-primary position-relative">
+                                            INFJ<span
+                                                class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                                                <i class="fas fa-heart text-white" style="font-size: 0.85rem;"></i>
+                                                <span class="visually-hidden">New alerts</span>
+                                            </span>
+                                        </button>
+                                    </div>
+
+                                    <h5>자기소개서 💁‍♀️</h5>
+                                    <p> 한 줄 키워드 : 못 먹어도 고! 🏃‍♀️</p>
+                                    <p> 취미 : 스쿼시 🎾</p>
+                                    <p> MBTI : INFJ</p>
+                                    <p> 장점 : 책임감이 강함, 계획적 📅</p>
+                                    <p> 단점 : 집요함, 예민함 ☄</p>
+                                    <p> 별명 : 면봉 </p>
+                                    <p> 좌우명 : 정의롭게 살자 🌟</p>
+
+                                    <p><a class="btn btn-lg btn-primary" href="#">Make a comment</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item active">
+                        <svg class="bd-placeholder-img" width="100%" height="600px" xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                            <rect width="100%" height="100%" fill="#D6E6F2"></rect>
+                        </svg>
+                        <div class="container">
+                            <div class="carousel-caption">
+                                <div class="image">
+                                    <img align="left"
+                                        src="https://github.com/LeeNaYoung240/LeeNaYoung240.github.io/assets/107848521/96fe076e-eb24-46d9-9b14-346027431f97"
+                                        alt="윤일영" style="width:400px;">
+                                </div>
+                                <div class="intro_container">
+                                    <h1>윤일영</h1>
+
+                                    <div class="mbtiBtn">
+                                        <button type="button" class="btn btn-primary position-relative">
+                                            INFP<span
+                                                class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                                                <i class="fas fa-heart text-white" style="font-size: 0.85rem;"></i>
+                                                <span class="visually-hidden">New alerts</span>
+                                            </span>
+                                        </button>
+                                    </div>
+
+                                    <h3>자기소개서 💁‍♀️</h3>
+                                    <p> 한 줄 키워드 : 이모 아님 나름 동안 👧</p>
+                                    <p> 취미 : 음악감상 🎼</p>
+                                    <p> MBTI : INFP</p>
+                                    <p> 장점 : 집중력, 꼼꼼함 💡</p>
+                                    <p> 단점 : 게으름, 부정적 💦</p>
+                                    <p> 별명 : 씹프피, 찐따 🤓</p>
+
+                                    <p><a class="btn btn-lg btn-primary" href="#">Make a comment</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <svg class="bd-placeholder-img" width="100%" height="600px" xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                            <rect width="100%" height="100%" fill="#D6E6F2"></rect>
+                        </svg>
+                        <div class="container">
+                            <div class="carousel-caption">
+                                <div class="image">
+                                    <img align="left"
+                                        src="https://github.com/LeeNaYoung240/LeeNaYoung240.github.io/assets/107848521/d9febadb-f84c-473a-ace1-7ce1b0e145fd"
+                                        alt="조현아" style="width:400px;">
+                                </div>
+                                <div class="intro_container">
+                                    <h1>조현아</h1>
+
+                                    <div class="mbtiBtn">
+                                        <button type="button" class="btn btn-primary position-relative">
+                                            INFP<span
+                                                class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                                                <i class="fas fa-heart text-white" style="font-size: 0.85rem;"></i>
+                                                <span class="visually-hidden">New alerts</span>
+                                            </span>
+                                        </button>
+                                    </div>
+
+                                    <h3>자기소개서 💁‍♀️</h3>
+                                    <p> 한 줄 키워드 : 응애 나 애기 스무살! 🧒</p>
+                                    <p> 취미 : 노래 부르기🎤, 책 읽기📕, 게임🎮</p>
+                                    <p> MBTI : INFP</p>
+                                    <p> 장점 : 순간 집중력, 추진력 💨</p>
+                                    <p> 단점 : 게으름, 귀차니즘 💫</p>
+                                    <p> 별명 : 조리조리 </p>
+                                    <p><a class="btn btn-lg btn-primary" href="#">Make a comment</a></p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <svg class="bd-placeholder-img" width="100%" height="600px" xmlns="http://www.w3.org/2000/svg"
-                        aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <rect width="100%" height="100%" fill="#D6E6F2"></rect>
-                    </svg>
-                    <div class="container">
-                        <div class="carousel-caption">
-                            <div class="image">
-                                <img align="left"
-                                    src="https://github.com/LeeNaYoung240/1BTI_mini-project/assets/107848521/8e9efd4a-1650-4d29-813b-f3e25c338fe9"
-                                    alt="이나영" style="width:400px; height:400px;">
-                            </div>
-                            <div class="intro_container">
-                                <h1>이나영</h1>
 
-                                <div class="mbtiBtn">
-                                    <button type="button" class="btn btn-primary position-relative">ENFP
-                                        <span
-                                            class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
-                                            <i class="fas fa-heart text-white" style="font-size: 0.85rem;"></i>
-                                            <span class="visually-hidden">New alerts</span>
-                                        </span>
-                                    </button>
-                                </div>
-
-                                <h3>자기소개서 💁‍♀️</h3>
-                                <p> 한 줄 키워드 : 재미 빼면 시체 ☠</p>
-                                <p> 취미 : 강아지 산책🐶, 웹툰 📃</p>
-                                <p> MBTI : ENFP</p>
-                                <p> 장점 : 밤새 고민할 수 있는 끈기 💪</p>
-                                <p> 단점 : 수동적인 성격, 감정에 지배적 🤸‍♀️</p>
-                                <p> 별명 : 영나이 </p>
-                                <p> 좌우명 : 그 여정이 바로 보상이다. 🎈 </p>
-
-                                <p><a class="btn btn-lg btn-primary" href="#">Make a comment</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="carousel-item">
-                    <svg class="bd-placeholder-img" width="100%" height="600px" xmlns="http://www.w3.org/2000/svg"
-                        aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <rect width="100%" height="100%" fill="#D6E6F2"></rect>
-                    </svg>
-                    <div class="container">
-                        <div class="carousel-caption">
-                            <div class="image">
-                                <img align="left"
-                                    src="https://github.com/LeeNaYoung240/LeeNaYoung240.github.io/assets/107848521/96f9612c-254a-410e-ab35-71ffdf8e3989"
-                                    alt="한해정" style="width:400px; height:400px;">
-                            </div>
-                            <div class="intro_container">
-                                <h1>한해정</h1>
-
-                                <div class="mbtiBtn">
-                                    <button type="button" class="btn btn-primary position-relative">
-                                        INFJ<span
-                                            class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
-                                            <i class="fas fa-heart text-white" style="font-size: 0.85rem;"></i>
-                                            <span class="visually-hidden">New alerts</span>
-                                        </span>
-                                    </button>
-                                </div>
-
-                                <h5>자기소개서 💁‍♀️</h5>
-                                <p> 한 줄 키워드 : 못 먹어도 고! 🏃‍♀️</p>
-                                <p> 취미 : 스쿼시 🎾</p>
-                                <p> MBTI : INFJ</p>
-                                <p> 장점 : 책임감이 강함, 계획적 📅</p>
-                                <p> 단점 : 집요함, 예민함 ☄</p>
-                                <p> 별명 : 면봉 </p>
-                                <p> 좌우명 : 정의롭게 살자 🌟</p>
-
-                                <p><a class="btn btn-lg btn-primary" href="#">Make a comment</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item active">
-                    <svg class="bd-placeholder-img" width="100%" height="600px" xmlns="http://www.w3.org/2000/svg"
-                        aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <rect width="100%" height="100%" fill="#D6E6F2"></rect>
-                    </svg>
-                    <div class="container">
-                        <div class="carousel-caption">
-                            <div class="image">
-                                <img align="left"
-                                    src="https://github.com/LeeNaYoung240/LeeNaYoung240.github.io/assets/107848521/96fe076e-eb24-46d9-9b14-346027431f97"
-                                    alt="윤일영" style="width:400px; height:400px;">
-                            </div>
-                            <div class="intro_container">
-                                <h1>윤일영</h1>
-
-                                <div class="mbtiBtn">
-                                    <button type="button" class="btn btn-primary position-relative">
-                                        INFP<span
-                                            class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
-                                            <i class="fas fa-heart text-white" style="font-size: 0.85rem;"></i>
-                                            <span class="visually-hidden">New alerts</span>
-                                        </span>
-                                    </button>
-                                </div>
-
-                                <h3>자기소개서 💁‍♀️</h3>
-                                <p> 한 줄 키워드 : 이모 아님 나름 동안 👧</p>
-                                <p> 취미 : 음악감상 🎼</p>
-                                <p> MBTI : INFP</p>
-                                <p> 장점 : 집중력, 꼼꼼함 💡</p>
-                                <p> 단점 : 게으름, 부정적 💦</p>
-                                <p> 별명 : 씹프피, 찐따 🤓</p>
-
-                                <p><a class="btn btn-lg btn-primary" href="#">Make a comment</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="carousel-item">
-                    <svg class="bd-placeholder-img" width="100%" height="600px" xmlns="http://www.w3.org/2000/svg"
-                        aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <rect width="100%" height="100%" fill="#D6E6F2"></rect>
-                    </svg>
-                    <div class="container">
-                        <div class="carousel-caption">
-                            <div class="image">
-                                <img align="left"
-                                    src="https://github.com/LeeNaYoung240/LeeNaYoung240.github.io/assets/107848521/d9febadb-f84c-473a-ace1-7ce1b0e145fd"
-                                    alt="조현아" style="width:400px; height:400px;">
-                            </div>
-                            <div class="intro_container">
-                                <h1>조현아</h1>
-
-                                <div class="mbtiBtn">
-                                    <button type="button" class="btn btn-primary position-relative">
-                                        INFP<span
-                                            class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
-                                            <i class="fas fa-heart text-white" style="font-size: 0.85rem;"></i>
-                                            <span class="visually-hidden">New alerts</span>
-                                        </span>
-                                    </button>
-                                </div>
-
-                                <h3>자기소개서 💁‍♀️</h3>
-                                <p> 한 줄 키워드 : 응애 나 애기 스무살! 🧒</p>
-                                <p> 취미 : 노래 부르기🎤, 책 읽기📕, 게임🎮</p>
-                                <p> MBTI : INFP</p>
-                                <p> 장점 : 순간 집중력, 추진력 💨</p>
-                                <p> 단점 : 게으름, 귀차니즘 💫</p>
-                                <p> 별명 : 조리조리 </p>
-                                <p><a class="btn btn-lg btn-primary" href="#">Make a comment</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
-
-            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
 
 
 
