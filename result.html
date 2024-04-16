@@ -68,6 +68,13 @@
         .card-title{
             margin-left: 100px;
         }
+        .result_name{
+            color: red;
+            text-decoration-line: none;
+        }
+        .result_name:hover{
+            color: red;
+        }
     </style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -129,9 +136,9 @@
     <span></span>
     <div class="result">
         <div class="card-body">
-            <img src="./image_1.jpg" class="res_img">
-            <p><h1 class="card-title">당신은 조현아 와 잘 맞습니다!</h1></p><br>
-            <p><h3 class="description">설명 어쩌구저쩌구</h3></p>
+            <img src="./image_1.jpg" class="res_img" id="res_img">
+            <p><h1 class="card-title">당신은 <a class="result_name"id="result_name"></a> 와 잘 맞습니다!</h1></p><br>
+            <p><h3 class="description" id="result_description"></h3></p>
         </div>
     </div>
 </body>
