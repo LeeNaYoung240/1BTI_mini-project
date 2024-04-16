@@ -16,37 +16,16 @@
         * {
             font-family: "Gowun Dodum", sans-serif;
         }
-        
-        /*상단의 로고*/
+
+        /*상단의 로고 - 현재 blue로 되어있음*/
         .title_logo {
+            /*로고 높이 100*/
             height: 100px;
-            /*로고 높이 150*/
-            color: white;
-            /*텍스트 색상 : white*/
-
-            display: flex;
-            /* flexbox 레이아웃을 사용하여 요소를 가운데 정렬 */
-            flex-direction: column;
-            /* 세로 방향으로 배치 */
-            align-items: center;
-            /* 수평과 수직으로 가운데 정렬 */
-            justify-content: center;
-
             /* 배경 이미지 설정 */
             background-image: url('https://github.com/LeeNaYoung240/LeeNaYoung240.github.io/assets/107848521/6ec7b3af-603c-49e4-a70e-2144e82c7dc0');
-            background-position: center;
-            background-size: cover;
-            /* 배경 이미지를 커버하는 크기로 설정 */
-        }
-
-        body {
-            background-color: white;
         }
 
         .member_container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
             margin-top: 30px;
             /* 간격 조절 */
         }
@@ -55,7 +34,6 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            /* 가운데 정렬 */
             align-items: flex-start;
             width: 100%;
             margin-bottom: 20px;
@@ -82,21 +60,13 @@
 
         .member_card h3 {
             font-size: 2.5rem;
-
         }
 
         .member_card p {
             font-size: 1.5rem;
         }
 
-        .intro_container {
-            width: calc(100% - 300px);
-            max-width: 650px;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-        }
-
+        /*댓글 칸 크기 조정*/
         .comments-section {
             margin: 50px auto;
             max-width: 800px;
@@ -113,17 +83,6 @@
             margin-bottom: 10px;
         }
 
-        @media (max-width: 768px) {
-            .member_card_container {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .intro_container {
-                width: calc(100% - 40px);
-                margin-top: 20px;
-            }
-        }
 
         /*자기소개서 텍스트 가운데*/
         .intro_container {
@@ -174,27 +133,6 @@
 
         // 댓글 데이터베이스 참조
         const commentsRef = ref(database, 'hyunacomments');
-
-        // 페이지 로드 시 댓글 로드
-        onValue(commentsRef, (snapshot) => {
-            const comments = snapshot.val();
-            displayComments(comments);
-        });
-
-
-        function displayComments(comments) {
-            const commentsList = document.querySelector('.comments-list');
-            commentsList.innerHTML = '';
-            for (const key in comments) {
-                const comment = comments[key];
-                const commentDiv = document.createElement('div');
-                commentDiv.classList.add('hyunacomments');
-                commentDiv.innerHTML = `
-                    <strong>${comment.name}</strong>: ${comment.message}
-                `;
-                commentsList.appendChild(commentDiv);
-            }
-        }
 
         document.getElementById('comment-form').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -303,7 +241,7 @@
                 <p> 장점 : 순간 집중력, 추진력 💨</p>
                 <p> 단점 : 게으름, 귀차니즘 💫</p>
                 <p> 별명 : 조리조리 </p>
-              
+
             </div>
         </div>
     </div>
@@ -311,9 +249,6 @@
     <!-- 댓글 섹션 -->
     <div class="comments-section">
         <h3>댓글 💌</h3>
-        <div class="comments-list">
-            <!-- Comments will be dynamically added here -->
-        </div>
         <table class="table">
             <thead>
                 <tr>

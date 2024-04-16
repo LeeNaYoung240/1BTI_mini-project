@@ -17,172 +17,94 @@
             font-family: "Gowun Dodum", sans-serif;
         }
 
-        /*상단의 로고*/
+        /*상단의 로고 - 현재 blue로 되어있음*/
         .title_logo {
-            height: 100px;
-            /*로고 높이 150*/
-            color: white;
-            /*텍스트 색상 : white*/
-
-            display: flex;
-            /* flexbox 레이아웃을 사용하여 요소를 가운데 정렬 */
-            flex-direction: column;
-            /* 세로 방향으로 배치 */
-            align-items: center;
-            /* 수평과 수직으로 가운데 정렬 */
-            justify-content: center;
-
+            /*로고 높이 100*/  
+            height: 100px;       
             /* 배경 이미지 설정 */
             background-image: url('https://github.com/LeeNaYoung240/LeeNaYoung240.github.io/assets/107848521/6ec7b3af-603c-49e4-a70e-2144e82c7dc0');
-            background-position: center;
-            background-size: cover;
-            /* 배경 이미지를 커버하는 크기로 설정 */
         }
 
-        .notice_board {
-            display: flex;
-            justify-content: center;
-            /* 자식 요소들을 수평 방향으로 가운데 정렬 */
-            align-items: center;
-            /* 자식 요소들을 수직 방향으로 가운데 정렬 */
-            margin-top: 70px;
-            margin-left: 100px;
-            margin-right: 0px;
-        }
-
-        .notice_board_img {
-            width: 200px;
-            height: auto;
-            margin-right: 20px;
-            /* .notice_board_content와의 오른쪽 간격 설정 */
-            padding: 13px;
-            border-radius: 5px;
-        }
-
-        .logoImage {
-            width: 180px;
-            height: 200px;
-        }
-
-        .notice_board_content {
-            width: 400px;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0px 0px 5px 0px rgb(3, 11, 58);
-            margin-left: 20px;
-            font-family: 'Courier New', Courier, monospace;
-            /* 등고체 계열의 폰트 사용 */
-            line-height: 1.6;
-            /* 줄간격 설정 */
-            position: relative;
-        }
-
-        .notice_board_content::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -15px;
-            width: 10px;
-            height: 100%;
-            background-color: #ffffff;
-            border-top-left-radius: 8px;
-            border-bottom-left-radius: 8px;
-            box-shadow: -7px 0px 15px -10px rgba(0, 0, 0, 0.75);
-        }
-
-        body {
-            background-color: white;
-        }
-
+     
         .member_container {
-            display: flex;
-            flex-wrap: wrap;
+            /* 가로로 정렬되게 함 */
+            display: flex;     
+            /* 멤버 카드 센터로 위치 */      
             justify-content: center;
-            margin-top: 100px;
-            /* 간격 조절 */
+            /* 상단 로고와의 간격 조절 */
+            margin-top: 100px; 
         }
 
         .member_card {
+             /* 멤버카드 안 텍스트 가운데 정렬 */
             text-align: center;
-            margin: 0 20px;
             /* 카드 간격 조절 */
-            width: 250px;
+            margin: 0 20px;    
             /* 카드 너비 */
+            width: 250px;
+             /* 내용 여백 */
             padding: 20px;
-            /* 내용 여백 */
-            border-radius: 10px;
             /* 모서리 둥글게 */
-            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
             /* 그림자 */
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);   
             margin: 70px 50px 50px 50px;
 
         }
 
         .member_card img {
-            width: 170px;
-            /* 이미지 크기 조절 */
+              /* 멤버카드 이미지 크기 조절 */
+            width: 170px; 
+             /* 멤버카드 이미지 원 형태로 변환*/
             border-radius: 50%;
-
         }
 
         .member_card h3 {
+              /* 멤버카드 이름 사이즈 조절 */
             font-size: 2.5rem;
-
         }
 
         .member_card p {
+             /* 멤버카드 이름 밑 설명 사이즈 조절 */
             font-size: 1.5rem;
 
         }
-
-
         .team_info {
+              /* 팀 규칙 설명 배경 색*/
             background-color: #f8f9fa;
+            /* 팀 규칙 설명 모서리 둥글게*/
             padding: 20px;
+             /* 텍스트 가운데 정렬*/
             text-align: center;
-            border-radius: 10px;
             box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+            /* 팀 규칙 설명 카드 너비 500px 지정 */
             width: 500px;
-            /* 카드를 풀 너비로 설정 */
+             /* 위쪽 여백 추가 */
             margin-top: 20px;
-            /* 위쪽 여백 추가 */
-            margin-left: auto;
             /* 왼쪽 여백을 자동으로 설정하여 가운데 정렬 */
-            margin-right: auto;
+            margin-left: auto;   
             /* 오른쪽 여백을 자동으로 설정하여 가운데 정렬 */
+            margin-right: auto;
+            
         }
-
-        
+     
         .support-section {
+            /*댓글 카드 너비 조정*/
             width: 50%;
-            /* 또는 필요에 따라 원하는 너비로 조정 */
             margin: 20px auto 20px 130px;
-            /* 중앙 정렬을 위해 좌우 여백을 auto로 설정 */
+            /* 댓글 카드 둥글게*/
             padding: 20px;
+            /* 테두리 그림*/
             border: 1px solid #ccc;
+             /* 댓글 카드 테두리 둥글게*/
             border-radius: 10px;
         }
 
         .support-list {
+             /*댓글 카드 안 '응원의 한마디'부분이랑 공간 줌*/
             margin-top: 20px;
         }
 
-        .support {
-            margin-bottom: 10px;
-        }
-
-        @media (max-width: 768px) {
-            .member_card_container {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .intro_container {
-                width: calc(100% - 40px);
-                margin-top: 20px;
-            }
-        }
     </style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -212,46 +134,28 @@
 
         // 댓글 데이터베이스 참조
         const commentsRef = ref(database, 'support');
-
-        // 페이지 로드 시 댓글 로드
-        onValue(commentsRef, (snapshot) => {
-            const support = snapshot.val();
-            displayComments(support);
-        });
-
-
-        function displayComments(support) {
-            const commentsList = document.querySelector('.support-list');
-            commentsList.innerHTML = '';
-            for (const key in support) {
-                const support = support[key];
-                const commentDiv = document.createElement('div');
-                commentDiv.classList.add('support');
-                commentDiv.innerHTML = `
-                <strong>${support.name}</strong>: ${support.message}
-            `;
-                commentsList.appendChild(commentDiv);
-            }
-        }
+  
 
         document.getElementById('support-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
+            e.preventDefault();// 기본 제출 동작을 막음
             const nameInput = document.getElementById('name-input');
             const commentInput = document.getElementById('support-input');
-            const name = nameInput.value.trim();
-            const message = commentInput.value.trim();
+            const name = nameInput.value.trim();// 입력된 이름을 얻어와서 공백을 제거
+            const message = commentInput.value.trim(); // 입력된 댓글을 얻어와서 공백을 제거
+            //이름, 댓글이 입력되어 있을 경우에만 수행
             if (name !== '' && message !== '') {
                 try {
-
+                // Firestore에 새로운 댓글을 추가, 컬렉션 : support
                     await addDoc(collection(db, 'support'), {
                         name: name,
                         message: message
                     });
+                    //입력 필드 비우기
                     nameInput.value = '';
                     commentInput.value = '';
                     alert('댓글 저장 성공!');
 
-                    // 추가 코드: 댓글이 추가되면 새로운 댓글을 불러옴
+                    /// 댓글이 추가되면 테이블에 새로운 댓글을 표시하는 함수 호출
                     getDocs(collection(db, 'support')).then((querySnapshot) => {
                         const support = {};
                         querySnapshot.forEach((doc) => {
@@ -264,9 +168,11 @@
                 }
             }
         });
+        //댓글을 테이블에 표시
         function displayCommentsInTable(support) {
             const commentTableBody = document.getElementById('support-table-body');
-            commentTableBody.innerHTML = '';
+            commentTableBody.innerHTML = ''; //테이블 내용 비움
+            
             for (const key in support) {
                 const comment = support[key];
                 const row = document.createElement('tr');
@@ -395,10 +301,7 @@
             <!-- 댓글 섹션 -->
             <div class="support-section">
                 <h3 style = "text-align:center;">1조를 위한 응원의 한마디 💌</h3>
-                <p style="text-align: center;">😊응원의 한마디는 힘이 됩니다😊</p>
-                <div class="support-list">
-                    <!-- support will be dynamically added here -->
-                </div>
+                <p style="text-align: center;">😊응원의 한마디는 힘이 됩니다😊</p>     
                 <table class="table">
                     <thead>
                         <tr>
@@ -424,7 +327,6 @@
             </div>
         </div>
     </div>
-
 
 </body>
 
