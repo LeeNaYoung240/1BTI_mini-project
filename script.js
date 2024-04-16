@@ -34,3 +34,4 @@ $('#answer08').click(async function(){
     location.href="result.html";
     document.cookie='q4=02';
 })
+
