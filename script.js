@@ -154,19 +154,38 @@ $(document).ready(function () {
     let result = res();
     if(result=="조현아"){
         $('#result_name').text('조현아');
-        $('#result_description').text();
+        $('#result_hobby').text('노래부르기, 책읽기, 게임하기');
+        $('#mbti').text('INFP');
+        $('#good').text('순간 집중력, 추진력');
+        $('#bad').text('게으름, 귀차니즘');
+        $('#nickname').text('조리조리');
         document.getElementById('res_img').src="./조현아.jpg";
     }
     if(result=="한해정"){
         $('#result_name').text('한해정');
+        $('#result_hobby').text('스쿼시');
+        $('#mbti').text('INFJ');
+        $('#good').text('책임감이 강함, 계획적');
+        $('#bad').text('집요함,예민함');
+        $('#nickname').text('면봉');
         document.getElementById('res_img').src='./한해정.png';
     }
     if(result=="이나영"){
         $('#result_name').text('이나영');
-        document.getElementById('res_img').src='./조현아.jpg';
+        $('#result_hobby').text('웹툰, 강아지 산책');
+        $('#mbti').text('ENFP');
+        $('#good').text('밤새 고민할 수 있는 끈기');
+        $('#bad').text('수동적인 성격, 감정에 지배적');
+        $('#nickname').text('영나이');
+        document.getElementById('res_img').src='./이나영.jpg';
     }
     if(result=="윤일영"){
         $('#result_name').text('윤일영');
+        $('#result_hobby').text('음악감상');
+        $('#mbti').text('INFP');
+        $('#good').text('집중력, 꼼꼼함');
+        $('#bad').text('게으름, 부정적');
+        $('#nickname').text('씹프피, 찐따');
         document.getElementById('res_img').src='./윤일영.jpeg';
     }
 })

@@ -42,6 +42,11 @@
         body {
             background-color: white;
         }
+        .result_card{
+            width: auto;
+            height:800px;
+            background-color: rgba(240, 248, 255, 0.667);
+        }
 
         .btn-group {
             margin-top: 50px;
@@ -53,27 +58,52 @@
 
         .result {
             width: 1000px;
-            height: 800px;
+            height: 400px;
             margin: 30px auto 0px auto;
             display: flex;
             flex-direction: column;
             justify-content: center;
             text-align: center;
         }
-         .res_img{
-            width: 300px;
+
+        .res_img {
+            height: 400px;
             object-fit: cover;
-            float:left;
+            float: left;
         }
-        .card-title{
+
+        .card-title {
             margin-left: 100px;
         }
-        .result_name{
+
+        .result_name {
             color: red;
             text-decoration-line: none;
         }
-        .result_name:hover{
+
+        .result_name:hover {
             color: red;
+        }
+
+        .button {
+            margin: 50px auto 0px auto;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            text-align: center;
+            scale: 150%;
+        }
+
+        .button>.btn-primary1 {
+            background-color: lightblue;
+            border-color: transparent;
+            margin: 10px;
+        }
+
+        .button>.btn-primary2 {
+            background-color: lightcoral;
+            border-color: transparent;
+            margin: 10px;
         }
     </style>
 
@@ -119,6 +149,8 @@
                         <use xlink:href="#bootstrap"></use>
                     </svg>
                 </a>
+                <img src="https://github.com/LeeNaYoung240/LeeNaYoung240.github.io/assets/107848521/7a88cc7b-a0cc-46ff-b75a-f5be7abb13c2"
+                    alt="팀 로고" width="200" height="150">
                 <!-- 메뉴 목록 -->
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li><a href="#" class="nav-link px-2 text-danger">Home</a></li>
@@ -129,16 +161,26 @@
             </div>
         </div>
     </header>
-
-    <div class="title_logo">
-        <h1>1BTI</h1>
-    </div>
     <span></span>
-    <div class="result">
-        <div class="card-body">
-            <img src="./image_1.jpg" class="res_img" id="res_img">
-            <p><h1 class="card-title">당신은 <a class="result_name"id="result_name"></a> 와 잘 맞습니다!</h1></p><br>
-            <p><h3 class="description" id="result_description"></h3></p>
+    <div class="result_card">
+        <div class="result">
+            <div class="card-body">
+                <img src="./image_1.jpg" class="res_img" id="res_img">
+                <p>
+                <h1 class="card-title">당신은 <a class="result_name" id="result_name"></a> 와 잘 맞습니다!</h1>
+                </p><br>
+                <p>
+                <h3 class="description">취미: <a id="result_hobby"></a></h3>
+                <h3 class="description">MBTI: <a id="mbti"></a></h3>
+                <h3 class="description">장점: <a id="good"></a></h3>
+                <h3 class="description">단점: <a id="bad"></a></h3>
+                <h3 class="description">별명: <a id="nickname"></a></h3>
+                </p>
+            </div>
+        </div>
+        <div class="button">
+            <a class="btn btn-primary1" href="#" role="button">다른 팀원도 보러가기</a>
+            <a class="btn btn-primary2" href="#" role="button">질문별 답변 보러가기</a>
         </div>
     </div>
 </body>
