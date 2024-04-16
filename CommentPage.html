@@ -16,6 +16,27 @@
         * {
             font-family: "Gowun Dodum", sans-serif;
         }
+        /*상단의 로고*/
+        .title_logo {
+            height: 100px;
+            /*로고 높이 150*/
+            color: white;
+            /*텍스트 색상 : white*/
+
+            display: flex;
+            /* flexbox 레이아웃을 사용하여 요소를 가운데 정렬 */
+            flex-direction: column;
+            /* 세로 방향으로 배치 */
+            align-items: center;
+            /* 수평과 수직으로 가운데 정렬 */
+            justify-content: center;
+
+            /* 배경 이미지 설정 */
+            background-image: url('https://github.com/LeeNaYoung240/LeeNaYoung240.github.io/assets/107848521/6ec7b3af-603c-49e4-a70e-2144e82c7dc0');
+            background-position: center;
+            background-size: cover;
+            /* 배경 이미지를 커버하는 크기로 설정 */
+        }
 
         body {
             background-color: white;
@@ -37,6 +58,8 @@
             align-items: flex-start;
             width: 100%;
             margin-bottom: 20px;
+            margin-top: 30px;
+            /* 멤버 카드와의 간격 조절 */
         }
 
         .member_card {
@@ -45,8 +68,10 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-            margin-top: 10px;
-            margin: 30px 70px 50px 50px;
+            margin-top: 75px;
+            margin-right: 50px;
+            /* 멤버 카드 간의 간격 조절 */
+
         }
 
         .member_card img {
@@ -56,6 +81,7 @@
 
         .member_card h3 {
             font-size: 2.5rem;
+
         }
 
         .member_card p {
@@ -97,6 +123,27 @@
                 margin-top: 20px;
             }
         }
+
+        /*자기소개서 텍스트 가운데*/
+        .intro_container {
+            width: calc(100% - 300px);
+            max-width: 650px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-top: 30px;
+            /* 멤버 카드와의 간격 조절 */
+        }
+
+        .intro_container h3 {
+            font-weight: bold;
+        }
+
+        .intro_container p {
+            font-size: 1.5rem;
+            /* 기존보다 크게 설정 */
+        }
     </style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -133,7 +180,7 @@
             displayComments(comments);
         });
 
-     
+
         function displayComments(comments) {
             const commentsList = document.querySelector('.comments-list');
             commentsList.innerHTML = '';
@@ -156,13 +203,13 @@
             const message = commentInput.value.trim();
             if (name !== '' && message !== '') {
                 try {
-                  
+
                     await addDoc(collection(db, 'comments'), {
                         name: name,
                         message: message
                     });
-                    nameInput.value = ''; 
-                    commentInput.value = ''; 
+                    nameInput.value = '';
+                    commentInput.value = '';
                     alert('댓글 저장 성공!');
 
                     // 추가 코드: 댓글이 추가되면 새로운 댓글을 불러옴
@@ -246,8 +293,14 @@
                 <h3>이나영</h3>
             </div>
             <div class="intro_container">
-                <h3>자기소개서</h3>
-                <p>여기에 자기소개서를 작성하세요.</p>
+                <h3>자기소개서 💁‍♀️</h3>
+                <p> 한 줄 키워드 : 재미 빼면 시체 ☠</p>
+                <p> 취미 : 강아지 산책🐶, 웹툰 📃</p>
+                <p> MBTI : ENFP</p>
+                <p> 장점 : 밤새 고민할 수 있는 끈기 💪</p>
+                <p> 단점 : 수동적인 성격, 감정에 지배적 🤸‍♀️</p>
+                <p> 별명 : 영나이 </p>
+                <p> 좌우명 : 그 여정이 바로 보상이다. 🎈 </p>
             </div>
         </div>
     </div>
@@ -270,7 +323,7 @@
             </tbody>
             <form id="comment-form">
                 <div class="mb-3">
-                    <label for="name-input" class="form-label">이름</label>
+                    <label for="name-input" class="form-label">닉네임</label>
                     <input type="text" class="form-control" id="name-input" placeholder="이름을 입력하세요...">
                 </div>
                 <div class="mb-3">
