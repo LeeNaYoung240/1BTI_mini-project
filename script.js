@@ -153,6 +153,9 @@ function res() {
 $(document).ready(function () {
     let result = res();
     if(result=="조현아"){
+        $('#res_img').click(function() {
+            window.location.href = "hyuna_CommentPage.html";
+        });
         $('#result_name').text('조현아');
         $('#result_hobby').text('노래부르기, 책읽기, 게임하기');
         $('#mbti').text('INFP');
@@ -162,6 +165,9 @@ $(document).ready(function () {
         document.getElementById('res_img').src="./조현아.jpg";
     }
     if(result=="한해정"){
+        $('#res_img').click(function() {
+            window.location.href = "haejung_CommentPage.html";
+        });
         $('#result_name').text('한해정');
         $('#result_hobby').text('스쿼시');
         $('#mbti').text('INFJ');
@@ -171,6 +177,9 @@ $(document).ready(function () {
         document.getElementById('res_img').src='./한해정.png';
     }
     if(result=="이나영"){
+        $('#res_img').click(function() {
+            window.location.href = "nayoung_Comment.html";
+        });
         $('#result_name').text('이나영');
         $('#result_hobby').text('웹툰, 강아지 산책');
         $('#mbti').text('ENFP');
@@ -180,6 +189,9 @@ $(document).ready(function () {
         document.getElementById('res_img').src='./이나영.jpg';
     }
     if(result=="윤일영"){
+        $('#res_img').click(function() {
+            window.location.href = "ilyoung_CommentPage.html";
+        });
         $('#result_name').text('윤일영');
         $('#result_hobby').text('음악감상');
         $('#mbti').text('INFP');
