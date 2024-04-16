@@ -16,6 +16,7 @@
         * {
             font-family: "Gowun Dodum", sans-serif;
         }
+
         
         /*상단의 로고*/
         .title_logo {
@@ -39,6 +40,8 @@
             /* 배경 이미지를 커버하는 크기로 설정 */
         }
 
+
+
         body {
             background-color: white;
         }
@@ -61,6 +64,8 @@
             margin-bottom: 20px;
             margin-top: 30px;
             /* 멤버 카드와의 간격 조절 */
+
+
         }
 
         .member_card {
@@ -69,9 +74,12 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+
             margin-top: 75px;
             margin-right: 50px;
             /* 멤버 카드 간의 간격 조절 */
+            margin-top: 10px;
+            margin: 30px 70px 50px 50px;
 
         }
 
@@ -82,7 +90,6 @@
 
         .member_card h3 {
             font-size: 2.5rem;
-
         }
 
         .member_card p {
@@ -145,6 +152,7 @@
             font-size: 1.5rem;
             /* 기존보다 크게 설정 */
         }
+
     </style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -181,7 +189,6 @@
             displayComments(comments);
         });
 
-
         function displayComments(comments) {
             const commentsList = document.querySelector('.comments-list');
             commentsList.innerHTML = '';
@@ -209,8 +216,13 @@
                         name: name,
                         message: message
                     });
+
                     nameInput.value = '';
                     commentInput.value = '';
+
+                    nameInput.value = ''; 
+                    commentInput.value = ''; 
+
                     alert('댓글 저장 성공!');
 
                     // 추가 코드: 댓글이 추가되면 새로운 댓글을 불러옴
@@ -294,6 +306,7 @@
                 <h3>이나영</h3>
             </div>
             <div class="intro_container">
+
                 <h3>자기소개서 💁‍♀️</h3>
                 <p> 한 줄 키워드 : 재미 빼면 시체 ☠</p>
                 <p> 취미 : 강아지 산책🐶, 웹툰 📃</p>
@@ -302,6 +315,10 @@
                 <p> 단점 : 수동적인 성격, 감정에 지배적 🤸‍♀️</p>
                 <p> 별명 : 영나이 </p>
                 <p> 좌우명 : 그 여정이 바로 보상이다. 🎈 </p>
+
+                <h3>자기소개서</h3>
+                <p>여기에 자기소개서를 작성하세요.</p>
+
             </div>
         </div>
     </div>
@@ -324,7 +341,11 @@
             </tbody>
             <form id="comment-form">
                 <div class="mb-3">
+
                     <label for="name-input" class="form-label">닉네임</label>
+
+                    <label for="name-input" class="form-label">이름</label>
+
                     <input type="text" class="form-control" id="name-input" placeholder="이름을 입력하세요...">
                 </div>
                 <div class="mb-3">
