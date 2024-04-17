@@ -247,7 +247,7 @@
             let indicatorCount = $('.carousel-indicators button').length; // 목록 개수 확인
             // 목록 버튼 추가
             let newIndicator = `<button type="button" data-bs-target="#myCarousel" data-bs-slide-to="${indicatorCount}" aria-label="Slide ${indicatorCount + 1}"></button>`;
-            $('.carousel-indicators').append(newIndicator); 
+            $('.carousel-indicators').append(newIndicator);
 
             // 기존 마지막 목록버튼 active 삭제, 마지막 목록버튼에 active 기능 추가
             $('.carousel-indicators button').removeClass('active');
@@ -352,8 +352,8 @@
                     class=""></button>
                 <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"
                     class=""></button>
-                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3" aria-label="Slide 4"
-                    class="" aria-current="true"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3" aria-label="Slide 4" class=""
+                    aria-current="true"></button>
             </div>
 
             <div class="carousel-inner">
