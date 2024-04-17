@@ -51,7 +51,7 @@
             background-color: white;
         }
 
-        .image > img {
+        .image>img {
             border-radius: 10px;
             box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
         }
@@ -66,11 +66,6 @@
             text-align: center;
             color: black;
         }
-
-    </style>
-
-
-
     </style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -80,24 +75,25 @@
         import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
         import { getFirestore, collection, addDoc, getDocs, setDoc, doc, query, where } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
         import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js";
+        import { getDownloadURL } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js";
 
         // Firebase 구성 정보 설정
         const firebaseConfig = {
-            apiKey: "AIzaSyALOBgwNixaYE3Ckm2rVDAept8DluZ_d1E",
-            authDomain: "bti-fbc0e.firebaseapp.com",
-            projectId: "bti-fbc0e",
-            storageBucket: "bti-fbc0e.appspot.com",
-            messagingSenderId: "547737531654",
-            appId: "1:547737531654:web:9d3670613d4e34a88f9a87",
-            measurementId: "G-BHXZ7XND1Z"
+            apiKey: "AIzaSyCzIX5h8SwGdDyZLsjja-eN-BwFutMGkvY",
+            authDomain: "sparta-26114.firebaseapp.com",
+            projectId: "sparta-26114",
+            storageBucket: "sparta-26114.appspot.com",
+            messagingSenderId: "218194191462",
+            appId: "1:218194191462:web:647832dcba096f347eb9a7",
+            measurementId: "G-JGP1CSZ3GR"
         };
 
         // Firebase 인스턴스 초기화
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
-        const database = getDatabase(app);
         const storage = getStorage(app);
+
 
         // 모달창 팀원 추가 등록 저장하기 버튼 클릭 시 
         $("#saveAddteam").click(async function () {
@@ -110,28 +106,24 @@
             let inputDis = $('#inputDis').val();
             let inputNickname = $('#inputNickname').val();
             let inputMotto = $('#inputMotto').val();
-            let uploadPhoto = $('#uploadPhoto').val();
+            let uploadPhoto = $('#uploadPhoto').prop('files')[0];
 
-            // firebase storage에 이미지 저장
-            let file = $('#uploadPhoto').prop('files')[0];
-            let storageRef = ref(storage, 'photos/' + file.name);
-
-            const teamMembersCollection = collection(db, 'teamMembers');
-
-            // 동일한 이름이 있는 지 확인
-            const querySnapshot = await getDocs(query(teamMembersCollection, where("Name", "==", inputName)));
-            if (!querySnapshot.empty) {
-                alert("이미 존재하는 이름이에요. 이름 옆에 A를 붙여주세요.");
-                return;
-            }
+            // image url 정의
+            let imageURL;
 
             try {
-                await uploadBytes(storageRef, file);
 
-                //firebase storage 에 이미지 저장할 url 생성
-                let photoURL = `https://storage.googleapis.com/${firebaseConfig.storageBucket}/photos/${file.name}`;
+                const imageURL = await uploadImageAndGetURL(uploadPhoto);
 
+                const teamMembersCollection = collection(db, 'teamMembers');
 
+                // 동일한 이름이 있는 지 확인
+                const querySnapshot = await getDocs(query(teamMembersCollection, where("Name", "==", inputName)));
+                if (!querySnapshot.empty) {
+                    alert("이미 존재하는 이름이에요. 이름 옆에 A를 붙여주세요.");
+                    return;
+                }
+                // 저장 이름 변경 
                 await setDoc(doc(teamMembersCollection, inputName), {
                     Name: inputName,
                     Intro: inputIntro,
@@ -141,7 +133,7 @@
                     Dis: inputDis,
                     Nickname: inputNickname,
                     Motto: inputMotto,
-                    PhotoURL: photoURL,
+                    PhotoURL: imageURL,
                 });
 
                 $('#inputName').val('');
@@ -162,13 +154,35 @@
             }
         });
 
+        // firebase storage에 image 저장 후 url 주소 가져오기 
+        async function uploadImageAndGetURL(imageFile) {
+            try {
+                const storageRef = ref(storage, 'images/' + imageFile.name);
+                await uploadBytes(storageRef, imageFile);
+
+                // firebase - storage 에서 이미지주소 가져오기
+                const downloadURL = await getDownloadURL(storageRef);
+
+                // console.log('Image URL:', downloadURL);
+
+                return downloadURL;
+            } catch (error) {
+                // console.error('Error uploading image:', error); 
+                throw error;
+            }
+        }
+
+
+
         $(document).ready(async function () {
+
+            $('.carousel-inner').empty();
             // 팀원 저장내용 불러오기
             let docs = await getDocs(collection(db, "teamMembers"));
-            
-            let num = 0;
+
             docs.forEach((doc) => {
                 let row = doc.data();
+
                 let inputName = row['Name'];
                 let inputIntro = row['inputIntro'];
                 let inputHobby = row['Hobby'];
@@ -179,39 +193,68 @@
                 let inputMotto = row['Motto'];
                 let photoURL = row['PhotoURL'];
 
-                let temp_html = `
-        <div class="container">
-            <div class="carousel-caption">
-                <div class="image">
-                    <img align="left" src="${photoURL}" alt="${inputName}" style="width:400px;">
-                </div>
-                <div class="intro_container">
-                    <h1>${inputName}</h1>
-                    <div class="mbtiBtn">
-                        <button type="button" class="btn btn-primary position-relative">${inputMbti}
-                            <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
-                                <i class="fas fa-heart text-white" style="font-size: 0.85rem;"></i>
-                                <span class="visually-hidden">New alerts</span>
-                            </span>
-                        </button>
+                let html = `
+                <div class="carousel-item">
+                    <svg class="bd-placeholder-img" width="100%" height="600px" xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <rect width="100%" height="100%" fill="#D6E6F2"></rect>
+                    </svg>
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <div class="image">
+                                <img align="left"
+                                    src="${photoURL}"
+                                    alt="${inputName}" style="width:400px;">
+                            </div>
+                            <div class="intro_container">
+                                <h1>${inputName}</h1>
+
+                                <div class="mbtiBtn">
+                                    <button type="button" class="btn btn-primary position-relative">
+                                        ${inputMbti}<span
+                                            class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                                            <i class="fas fa-heart text-white" style="font-size: 0.85rem;"></i>
+                                            <span class="visually-hidden">New alerts</span>
+                                        </span>
+                                    </button>
+                                </div>
+
+                                <h5>자기소개서 💁‍♀️</h5>
+                                <p> 한 줄 키워드 : ${inputIntro}</p>
+                                <p> 취미 : ${inputHobby}</p>
+                                <p> MBTI : ${inputMbti}</p>
+                                <p> 장점 : ${inputAdv}</p>
+                                <p> 단점 : ${inputDis}</p>
+                                <p> 별명 : ${inputNickname}</p>
+                                <p> 좌우명 : ${inputMotto}</p>
+
+                                <p><a class="btn btn-lg btn-primary" href="#">Make a comment</a></p>
+                            </div>
+                        </div>
                     </div>
-                    <h3>자기소개서 💁‍♀️</h3>
-                    <p> 한 줄 키워드 : ${inputIntro}</p>
-                    <p> 취미 : ${inputHobby}</p>
-                    <p> MBTI : ${inputMbti}</p>
-                    <p> 장점 : ${inputAdv}</p>
-                    <p> 단점 : ${inputDis}</p>
-                    <p> 별명 : ${inputNickname}</p>
-                    <p> 좌우명 : ${inputMotto}</p>
-                    <p><a class="btn btn-lg btn-primary" href="#">Make a comment</a></p>
-                </div>
-            </div>
-        </div>
-    </div>`;
-                num++;
-                $(`#carousel-${num}`).append(temp_html);
+                </div>`;
+                $('.carousel-inner').append(html);
             });
-        })
+
+            $('.carousel-item').first().addClass('active');
+
+            // 데이터 업데이트 시 다시 초기화 
+            // $('#myCarousel').carousel('dispose'); // 기존에 있던 carousel 삭제
+            // $('#myCarousel').carousel(); // 다시 초기화
+
+
+            // carousel 아래 목록 버튼 추가
+            let indicatorCount = $('.carousel-indicators button').length; // 목록 개수 확인
+            // 목록 버튼 추가
+            let newIndicator = `<button type="button" data-bs-target="#myCarousel" data-bs-slide-to="${indicatorCount}" aria-label="Slide ${indicatorCount + 1}"></button>`;
+            $('.carousel-indicators').append(newIndicator); 
+
+            // 기존 마지막 목록버튼 active 삭제, 마지막 목록버튼에 active 기능 추가
+            $('.carousel-indicators button').removeClass('active');
+            $(`.carousel-indicators button[data-bs-slide-to="${indicatorCount}"]`).addClass('active');
+
+        });
+
 
 
     </script>
@@ -242,7 +285,7 @@
             </div>
         </div>
     </header>
-   
+
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <div class="main">
@@ -310,7 +353,7 @@
                 <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"
                     class=""></button>
                 <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3" aria-label="Slide 4"
-                    class="active" aria-current="true"></button>
+                    class="" aria-current="true"></button>
             </div>
 
             <div class="carousel-inner">
@@ -363,8 +406,8 @@
                         <div class="carousel-caption">
                             <div class="image">
                                 <img align="left"
-                                    src="https://github.com/LeeNaYoung240/LeeNaYoung240.github.io/assets/107848521/96f9612c-254a-410e-ab35-71ffdf8e3989"
-                                    alt="한해정" style="width:400px;">
+                                    src="https://github.com/LeeNaYoung240/LeeNaYoung240.github.io/assets/107848521/96f9612c-254a-410e-ab35-71ffdf8e3989" "
+                                    alt=" 한해정" style="width:400px;">
                             </div>
                             <div class="intro_container">
                                 <h1>한해정</h1>
