@@ -112,11 +112,8 @@
             let imageURL;
 
             try {
-
                 const imageURL = await uploadImageAndGetURL(uploadPhoto);
-
                 const teamMembersCollection = collection(db, 'teamMembers');
-
                 // 동일한 이름이 있는 지 확인
                 const querySnapshot = await getDocs(query(teamMembersCollection, where("Name", "==", inputName)));
                 if (!querySnapshot.empty) {
@@ -159,25 +156,24 @@
             try {
                 const storageRef = ref(storage, 'images/' + imageFile.name);
                 await uploadBytes(storageRef, imageFile);
-
                 // firebase - storage 에서 이미지주소 가져오기
                 const downloadURL = await getDownloadURL(storageRef);
                 // console.log('Image URL:', downloadURL);
                 return downloadURL;
-
             } catch (error) {
                 // console.error('Error uploading image:', error); 
                 throw error;
             }
         }
+
         function convertToEnglish(koreanName) {
             //한글 이름 영어 이름으로 변환
             const koreanToEnglish = {
                 '이': 'lee', '나': 'na', '영': 'young',
-                '윤':'yoon','일':'il','영':'young',
-                '조':'jo','현':'hyun','아':'a',
-                '정':'jeong','효':'hyo','진':'jin',
-                '한':'han','해':'hae','정':'jung'
+                '윤': 'yoon', '일': 'il', '영': 'young',
+                '조': 'jo', '현': 'hyun', '아': 'a',
+                '정': 'jeong', '효': 'hyo', '진': 'jin',
+                '한': 'han', '해': 'hae', '정': 'jung'
             };
             let englishName = ''; //영어 이름 저장 변수
             for (let char of koreanName) { //입력된 한글 이름을 한 글자씩 확인, 영어로 변환
@@ -191,17 +187,13 @@
             return englishName;
         }
 
-
-
         $(document).ready(async function () {
-
             $('.carousel-inner').empty();
             // 팀원 저장내용 불러오기
             let docs = await getDocs(collection(db, "teamMembers"));
 
             docs.forEach((doc) => {
                 let row = doc.data();
-
                 let inputName = row['Name'];
                 let inputIntro = row['inputIntro'];
                 let inputHobby = row['Hobby'];
@@ -251,13 +243,7 @@
                                 <p> 단점 : ${inputDis}</p>
                                 <p> 별명 : ${inputNickname}</p>
                                 <p> 좌우명 : ${inputMotto}</p>
-
-
-
                                 <p><a class="btn btn-lg btn-primary" href="${commentPageLink}">Make a comment</a></p>
-
-                       
-
                             </div>
                         </div>
                     </div>
@@ -267,18 +253,18 @@
 
             $('.carousel-item').first().addClass('active');
 
-
             // carousel 아래 목록 버튼 추가
             let indicatorCount = $('.carousel-indicators button').length; // 목록 개수 확인
             // 목록 버튼 추가
             let newIndicator = `<button type="button" data-bs-target="#myCarousel" data-bs-slide-to="${indicatorCount}" aria-label="Slide ${indicatorCount + 1}"></button>`;
             $('.carousel-indicators').append(newIndicator);
-
             // 기존 마지막 목록버튼 active 삭제, 마지막 목록버튼에 active 기능 추가
             $('.carousel-indicators button').removeClass('active');
             $(`.carousel-indicators button[data-bs-slide-to="${indicatorCount}"]`).addClass('active');
 
         });
+
+
 
 
 
@@ -305,6 +291,8 @@
                     <li><a href="q_a.html" class="nav-link px-2 text-secondary">Q&A</a></li>
                     <li><a href="swipe_intro.html" class="nav-link px-2 text-danger">Team</a></li>
                     <li><a href="feedback.html" class="nav-link px-2 text-secondary">설문 하러가기</a></li>
+                    <li><a href="#" class="nav-link px-2 text-secondary" data-bs-toggle="modal"
+                            data-bs-target="#addTeamModal">팀원 등록하기</a></li>
                 </ul>
             </div>
         </div>
@@ -327,7 +315,7 @@
                             <label for="floatingInput">이름</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="inputIntro" placeholder="한줄 소개">
+                            <input type="text" class="form-control" id="inputIntro" placeholder="한 줄 소개">
                             <label for="floatingInput">한 줄 소개</label>
                         </div>
                         <div class="form-floating mb-3">
