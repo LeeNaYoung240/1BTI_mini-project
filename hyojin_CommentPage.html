@@ -133,7 +133,7 @@
         const database = getDatabase(app);
 
         // 댓글 데이터베이스 참조
-        const commentsRef = ref(database, 'nayoungcomments');
+        const commentsRef = ref(database, 'hyojincomments');
 
         document.getElementById('comment-form').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -144,7 +144,7 @@
             if (name !== '' && message !== '') {
                 try {
 
-                    await addDoc(collection(db, 'nayoungcomments'), {
+                    await addDoc(collection(db, 'hyojincomments'), {
                         name: name,
                         message: message
                     });
@@ -158,7 +158,7 @@
                     alert('댓글 저장 성공!');
 
                     // 추가 코드: 댓글이 추가되면 새로운 댓글을 불러옴
-                    getDocs(collection(db, 'nayoungcomments')).then((querySnapshot) => {
+                    getDocs(collection(db, 'hyojincomments')).then((querySnapshot) => {
                         const comments = {};
                         querySnapshot.forEach((doc) => {
                             comments[doc.id] = doc.data();
@@ -185,7 +185,7 @@
         }
 
         // 페이지 로드 시 댓글 로드
-        getDocs(collection(db, 'nayoungcomments')).then((querySnapshot) => {
+        getDocs(collection(db, 'hyojincomments')).then((querySnapshot) => {
             const comments = {};
             querySnapshot.forEach((doc) => {
                 comments[doc.id] = doc.data();
@@ -226,27 +226,27 @@
         <div class="member_card_container">
             <div class="member_card">
                 <button type="button" class="btn btn-primary position-relative">
-                    ENFP
+                    INFP
                     <span
                         class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
                         <i class="fas fa-heart text-white" style="font-size: 0.85rem;"></i>
                         <span class="visually-hidden">New alerts</span>
                     </span>
                 </button>
-                <img src="https://github.com/LeeNaYoung240/1BTI_mini-project/assets/107848521/8e9efd4a-1650-4d29-813b-f3e25c338fe9"
-                    alt="이나영">
-                <h3>이나영</h3>
+                <img src="https://github.com/LeeNaYoung240/LeeNaYoung240.github.io/assets/107848521/d6db9250-fccf-48b4-8a75-bd2baf65ea2f"
+                    alt="정효진">
+                <h3>정효진</h3>
             </div>
             <div class="intro_container">
 
                 <h3>자기소개서 💁‍♀️</h3>
-                <p> 한 줄 키워드 : 재미 빼면 시체 ☠</p>
-                <p> 취미 : 강아지 산책🐶, 웹툰 📃</p>
-                <p> MBTI : ENFP</p>
-                <p> 장점 : 밤새 고민할 수 있는 끈기 💪</p>
-                <p> 단점 : 수동적인 성격, 감정에 지배적 🤸‍♀️</p>
-                <p> 별명 : 영나이 </p>
-                <p> 좌우명 : 그 여정이 바로 보상이다. 🎈 </p>
+                <p> 한 줄 키워드 : 침대가 너무 조앙 🌆</p>
+                <p> 취미 : 게임 🎮, 웹툰 📃</p>
+                <p> MBTI : INFP</p>
+                <p> 장점 : 밝음, 긍정적 💕</p>
+                <p> 단점 : 귀차니즘 💤</p>
+                <p> 별명 : 피글렛, 햄스터  </p>
+            
             </div>
         </div>
     </div>
