@@ -154,7 +154,7 @@ $(document).ready(function () {
     let result = res();
     if(result=="조현아"){
         $('#res_img').click(function() {
-            window.location.href = "hyuna_CommentPage.html";
+            window.location.href = "johyuna_CommentPage.html";
         });
         $('#result_name').text('조현아');
         $('#result_hobby').text('노래부르기, 책읽기, 게임하기');
@@ -166,7 +166,7 @@ $(document).ready(function () {
     }
     if(result=="한해정"){
         $('#res_img').click(function() {
-            window.location.href = "haejung_CommentPage.html";
+            window.location.href = "hanhaejung_CommentPage.html";
         });
         $('#result_name').text('한해정');
         $('#result_hobby').text('스쿼시');
@@ -178,7 +178,7 @@ $(document).ready(function () {
     }
     if(result=="이나영"){
         $('#res_img').click(function() {
-            window.location.href = "nayoung_Comment.html";
+            window.location.href = "leenayoung_CommentPage.html";
         });
         $('#result_name').text('이나영');
         $('#result_hobby').text('웹툰, 강아지 산책');
@@ -190,7 +190,7 @@ $(document).ready(function () {
     }
     if(result=="윤일영"){
         $('#res_img').click(function() {
-            window.location.href = "ilyoung_CommentPage.html";
+            window.location.href = "yoonilyoung_CommentPage.html";
         });
         $('#result_name').text('윤일영');
         $('#result_hobby').text('음악감상');
@@ -202,7 +202,7 @@ $(document).ready(function () {
     }
     if(result=="정효진"){
         $('#res_img').click(function() {
-            window.location.href = "hyojin_CommentPage.html";
+            window.location.href = "jeonghyojin_CommentPage.html";
         });
         $('#result_name').text('정효진');
         $('#result_hobby').text('게임, 웹툰');

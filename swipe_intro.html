@@ -170,6 +170,26 @@
                 throw error;
             }
         }
+        function convertToEnglish(koreanName) {
+            //한글 이름 영어 이름으로 변환
+            const koreanToEnglish = {
+                '이': 'lee', '나': 'na', '영': 'young',
+                '윤':'yoon','일':'il','영':'young',
+                '조':'jo','현':'hyun','아':'a',
+                '정':'jeong','효':'hyo','진':'jin',
+                '한':'han','해':'hae','정':'jung'
+            };
+            let englishName = ''; //영어 이름 저장 변수
+            for (let char of koreanName) { //입력된 한글 이름을 한 글자씩 확인, 영어로 변환
+                if (char in koreanToEnglish) { //해당하는 글자 매핑시 영어로 변환
+                    englishName += koreanToEnglish[char];
+                } else {
+                    englishName += char;
+                }
+            }
+            //영어이름 반환
+            return englishName;
+        }
 
 
 
@@ -191,6 +211,11 @@
                 let inputNickname = row['Nickname'];
                 let inputMotto = row['Motto'];
                 let photoURL = row['PhotoURL'];
+                let englishName = convertToEnglish(inputName);
+                //한글 이름을 영어로 변환하여 저장
+                let commentPageLink = `${englishName}_CommentPage.html`;
+                //영어 이름을 이용, 해당 이름의 코멘트 페이지 링크 생성
+
 
                 let html = `
                 <div class="carousel-item">
@@ -227,7 +252,11 @@
                                 <p> 별명 : ${inputNickname}</p>
                                 <p> 좌우명 : ${inputMotto}</p>
 
+<<<<<<< HEAD
+                                <p><a class="btn btn-lg btn-primary" href="${commentPageLink}">Make a comment</a></p>
+=======
                                 <p><a class="btn btn-lg btn-primary" href="#">Make a comment</a></p>
+>>>>>>> 79617fe8d17e770afee89d10ec0151a02bd06869
                             </div>
                         </div>
                     </div>
@@ -271,11 +300,10 @@
                     alt="팀 로고" width="200" height="150">
                 <!-- 메뉴 목록 -->
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="#" class="nav-link px-2 text-danger">Home</a></li>
-                    <li><a href="#" class="nav-link px-2 text-secondary">Mypage</a></li>
-                    <li><a href="#" class="nav-link px-2 text-secondary">설문 하러가기</a></li>
-                    <li><a href="#" class="nav-link px-2 text-secondary" data-bs-toggle="modal"
-                            data-bs-target="#addTeamModal">팀원 등록하기</a></li>
+                    <li><a href="Home.html" class="nav-link px-2 text-secondary">Home</a></li>
+                    <li><a href="q_a.html" class="nav-link px-2 text-secondary">Q&A</a></li>
+                    <li><a href="swipe_intro.html" class="nav-link px-2 text-danger">Team</a></li>
+                    <li><a href="feedback.html" class="nav-link px-2 text-secondary">설문 하러가기</a></li>
                 </ul>
             </div>
         </div>

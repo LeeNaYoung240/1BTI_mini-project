@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1BTI</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+
+</head>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+
+    * {
+        font-family: "Gowun Dodum", sans-serif;
+    }
+
+    @font-face {
+        font-family: LocusSangsang’;
+        font-weight: normal;
+        font-style: normal;
+        src: url(‘https://cdn.jsdelivr.net/gh/webfontworld/locus/LocusSangsang.eot’);
+        src: url(‘https://cdn.jsdelivr.net/gh/webfontworld/locus/LocusSangsang.eot?#iefix’) format(‘embedded-opentype’),
+            url(‘https://cdn.jsdelivr.net/gh/webfontworld/locus/LocusSangsang.woff2’) format(‘woff2’),
+            url(‘https://cdn.jsdelivr.net/gh/webfontworld/locus/LocusSangsang.woff’) format(‘woff’),
+            url(‘https://cdn.jsdelivr.net/gh/webfontworld/locus/LocusSangsang.ttf’) format(“truetype”);
+        font-display: swap;
+    }
+
+    body {
+        background-color: #eceeed;
+    }
+
+    .tttop {
+        background-image: url('https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fb15FX7%2FbtsGFo6Rxyr%2FJFVCZwVRN19KDblmF0kNoK%2Fimg.png');
+        height: 950px;
+        max-width: 1800px;
+        z-index: -1000;
+
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+
+
+
+    .up {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin-top: 175px;
+    }
+
+    .down {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin-top: 45px;
+    }
+
+
+
+    .hover__wrap {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 370px;
+        height: 170px;
+        margin: 0px 0px 0px 0px;
+    }
+
+    .hover__wrap1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 370px;
+        height: 170px;
+        margin: 0px 0px 0px 0px;
+    }
+
+    .hover__wrap2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 370px;
+        height: 170px;
+        margin: 0px 0px 0px 0px;
+    }
+
+    .hover__wrap3 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 370px;
+        height: 170px;
+        margin: 0px 0px 0px 0px;
+    }
+
+
+
+    .hover__wrap>div {
+        max-width: 400px;
+        margin: 3%;
+        position: relative;
+        /*  원근감을 주는 것  */
+        perspective: 1000px;
+    }
+
+    .hover__wrap1>div {
+        max-width: 400px;
+        margin: 3%;
+        position: relative;
+        /*  원근감을 주는 것  */
+        perspective: 1000px;
+    }
+
+    .hover__wrap2>div {
+        max-width: 400px;
+        margin: 3%;
+        position: relative;
+        /*  원근감을 주는 것  */
+        perspective: 1000px;
+    }
+
+    .hover__wrap3>div {
+        max-width: 400px;
+        margin: 3%;
+        position: relative;
+        /*  원근감을 주는 것  */
+        perspective: 1000px;
+    }
+
+
+
+    .hover__wrap>div img {
+        width: 100%;
+        border: 5px solid #F0F8FF;
+        box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+        box-sizing: border-box;
+        vertical-align: top;
+    }
+
+    .hover__wrap1>div img {
+        width: 100%;
+        border: 5px solid #F0F8FF;
+        box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+        box-sizing: border-box;
+        vertical-align: top;
+    }
+
+    .hover__wrap2>div img {
+        width: 100%;
+        border: 5px solid #F0F8FF;
+        box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+        box-sizing: border-box;
+        vertical-align: top;
+    }
+
+    .hover__wrap3>div img {
+        width: 100%;
+        border: 5px solid #F0F8FF;
+        box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+        box-sizing: border-box;
+        vertical-align: top;
+    }
+
+
+
+    .hover__wrap>div .front {
+        transition: transform 1s;
+        backface-visibility: hidden;
+        transform-style: preserve-3d;
+    }
+
+    .hover__wrap1>div .front {
+        transition: transform 1s;
+        backface-visibility: hidden;
+        transform-style: preserve-3d;
+    }
+
+    .hover__wrap2>div .front {
+        transition: transform 1s;
+        backface-visibility: hidden;
+        transform-style: preserve-3d;
+    }
+
+    .hover__wrap3>div .front {
+        transition: transform 1s;
+        backface-visibility: hidden;
+        transform-style: preserve-3d;
+    }
+
+
+
+    .hover__wrap>div .back {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: -1;
+        transition: transform 1s;
+        transform-style: preserve-3d;
+    }
+
+    .hover__wrap1>div .back {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: -1;
+        transition: transform 1s;
+        transform-style: preserve-3d;
+    }
+
+    .hover__wrap2>div .back {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: -1;
+        transition: transform 1s;
+        transform-style: preserve-3d;
+    }
+
+    .hover__wrap3>div .back {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: -1;
+        transition: transform 1s;
+        transform-style: preserve-3d;
+    }
+
+
+
+    .hover__wrap>div figcaption {
+        background: rgba(88, 48, 123, 0.4);
+        color: #F8F8FF;
+        padding: 10px;
+        text-align: center;
+        line-height: 1.5;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) translatez(100px);
+        width: 60%;
+        backface-visibility: hidden;
+        cursor: pointer;
+    }
+
+    .hover__wrap1>div figcaption {
+        background: rgba(53, 130, 62, 0.4);
+        color: #F8F8FF;
+        padding: 10px;
+        text-align: center;
+        line-height: 1.5;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) translatez(100px);
+        width: 60%;
+        backface-visibility: hidden;
+        cursor: pointer;
+    }
+
+    .hover__wrap2>div figcaption {
+        background: rgba(29, 128, 126, 0.4);
+        color: #F8F8FF;
+        padding: 10px;
+        text-align: center;
+        line-height: 1.5;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) translatez(100px);
+        width: 60%;
+        backface-visibility: hidden;
+        cursor: pointer;
+    }
+
+    .hover__wrap3>div figcaption {
+        background: rgba(118, 105, 21, 0.4);
+        color: #F8F8FF;
+        padding: 10px;
+        text-align: center;
+        line-height: 1.5;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) translatez(100px);
+        width: 60%;
+        backface-visibility: hidden;
+        cursor: pointer;
+    }
+
+
+
+    .hover__leftright {}
+
+    /* mouse hover effect */
+
+    .hover__leftright .front {
+        transform: rotateY(0deg);
+    }
+
+    .hover__leftright:hover .front {
+        transform: rotateY(180deg);
+    }
+
+    .hover__leftright .back {
+        transform: rotateY(-180deg);
+    }
+
+    .hover__leftright:hover .back {
+        transform: rotateY(0deg);
+    }
+
+
+    .nav {
+        background-color: transparent;
+    }
+
+    .modal-body {
+        font-size: 15px;
+        word-break: break-all;
+    }
+
+
+
+
+    .intro_container {
+        width: calc(100% - 300px);
+        max-width: 650px;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    }
+
+    .comments-section {
+        margin: 0px auto;
+        width: 1000px;
+        padding: 30px;
+
+        border: 1px solid #ccc;
+        border-radius: 20px;
+        box-shadow: 0px 0px 10px 0px rgba(3, 3, 3, 0.3);
+        background-color: rgb(255, 255, 255);
+    }
+
+    .mb-3>input {
+        background-color: transparent;
+        border: 1px solid #000000;
+    }
+
+    .form-control {
+        background-color: transparent;
+        border: 1px solid #000000;
+    }
+
+    .comments-list {
+        margin-top: 0px;
+    }
+
+    .comment {
+        margin-bottom: 10px;
+    }
+
+    @media (max-width: 768px) {
+        .member_card_container {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .intro_container {
+            width: calc(100% - 40px);
+            margin-top: 20px;
+        }
+    }
+
+    .table {
+        margin-top: 40px;
+    }
+
+    .modal-title {
+        color: rgb(147, 109, 176);
+    }
+
+    .btn {
+        margin-left: 165px;
+    }
+
+    .btn-custom1 {
+        --bs-btn-color: #fff;
+        --bs-btn-bg: #795a95;
+        --bs-btn-border-color: #795a95;
+        --bs-btn-hover-color: #fff;
+        --bs-btn-hover-bg: #5a446e;
+        --bs-btn-hover-border-color: #5a446e;
+        --bs-btn-focus-shadow-rgb: 66, 70, 73;
+        --bs-btn-active-color: #fff;
+        --bs-btn-active-bg: #4d5154;
+        --bs-btn-active-border-color: #373b3e;
+        --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+        --bs-btn-disabled-color: #fff;
+        --bs-btn-disabled-bg: #795a95;
+        --bs-btn-disabled-border-color: #795a95;
+    }
+
+    .btn-custom2 {
+        --bs-btn-color: #fff;
+        --bs-btn-bg: #5e986b;
+        --bs-btn-border-color: #5e986b;
+        --bs-btn-hover-color: #fff;
+        --bs-btn-hover-bg: #3a6d4b;
+        --bs-btn-hover-border-color: #3a6d4b;
+        --bs-btn-focus-shadow-rgb: 66, 70, 73;
+        --bs-btn-active-color: #fff;
+        --bs-btn-active-bg: #4d5154;
+        --bs-btn-active-border-color: #373b3e;
+        --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+        --bs-btn-disabled-color: #fff;
+        --bs-btn-disabled-bg: #5e986b;
+        --bs-btn-disabled-border-color: #5e986b;
+    }
+
+    .btn-custom3 {
+        --bs-btn-color: #fff;
+        --bs-btn-bg: #589892;
+        --bs-btn-border-color: #589892;
+        --bs-btn-hover-color: #fff;
+        --bs-btn-hover-bg: #3e7572;
+        --bs-btn-hover-border-color: #373b3e;
+        --bs-btn-focus-shadow-rgb: 66, 70, 73;
+        --bs-btn-active-color: #fff;
+        --bs-btn-active-bg: #4d5154;
+        --bs-btn-active-border-color: #373b3e;
+        --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+        --bs-btn-disabled-color: #fff;
+        --bs-btn-disabled-bg: #589892;
+        --bs-btn-disabled-border-color: #589892;
+    }
+
+    .btn-custom4 {
+        --bs-btn-color: #fff;
+        --bs-btn-bg: #b39a4e;
+        --bs-btn-border-color: #b39a4e;
+        --bs-btn-hover-color: #fff;
+        --bs-btn-hover-bg: #817141;
+        --bs-btn-hover-border-color: #817141;
+        --bs-btn-focus-shadow-rgb: 66, 70, 73;
+        --bs-btn-active-color: #fff;
+        --bs-btn-active-bg: #4d5154;
+        --bs-btn-active-border-color: #373b3e;
+        --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+        --bs-btn-disabled-color: #fff;
+        --bs-btn-disabled-bg: #b39a4e;
+        --bs-btn-disabled-border-color: #b39a4e;
+    }
+</style>
+
+<body>
+    <div class="tttop">
+        <header class="p-3 text-bg-transparent">
+            <!-- 컨테이너를 포함하는 div 요소로 헤더를 감싸줌 -->
+            <div class="container">
+                <!-- flexbox를 사용하여 요소들을 가로로 정렬 -->
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <!-- 로고 링크, 홈으로 이동하는 링크로 설정-->
+                    <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                        <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+                            <use xlink:href="#bootstrap"></use>
+                        </svg>
+                    </a>
+                    <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbR0S5Q%2FbtsGFqcv0Bi%2FD7ZcyDKsd8eMe14aZPEMi1%2Fimg.png"
+                        alt="팀 로고" width="200" height="150">
+                    <!-- 메뉴 목록 -->
+                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                        <li><a href="Home.html" class="nav-link px-2 text-secondary">Home</a></li>
+                        <li><a href="q_a.html" class="nav-link px-2 text-danger">Q&A</a></li>
+                        <li><a href="swipe_intro.html" class="nav-link px-2 text-secondary">Team</a></li>
+                        <li><a href="feedback.html" class="nav-link px-2 text-secondary">설문 하러가기</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+
+
+        <div class="up">
+            <div class="hover__wrap">
+                <div class="hover__leftright">
+                    <figure class="front">
+                        <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FMwf3d%2FbtsGDJQUoV3%2FRoxk0SobtKdrCdfMhcGiPK%2Fimg.png"
+                            alt="hoverLeft 이미지">
+                        <figcaption>
+                            <h3>Q1</h3>
+                            <p>마우스를 올려주세요.</p>
+                        </figcaption>
+                    </figure>
+
+                    <figure class="back" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                        id="question1">
+                        <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FMwf3d%2FbtsGDJQUoV3%2FRoxk0SobtKdrCdfMhcGiPK%2Fimg.png"
+                            alt="hoverRight 이미지">
+                        <figcaption>
+                            <h5>아무도 없는 집에 들어가면 어떤가요?</h5>
+                            <p>(댓글창은 클릭!)</p>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+
+            <div class="hover__wrap1">
+                <div class="hover__leftright">
+                    <figure class="front">
+                        <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FMwf3d%2FbtsGDJQUoV3%2FRoxk0SobtKdrCdfMhcGiPK%2Fimg.png"
+                            alt="hoverLeft 이미지">
+                        <figcaption>
+                            <h3>Q2</h3>
+                            <p>마우스를 올려주세요.</p>
+                        </figcaption>
+                    </figure>
+                    <div class="11">
+                        <figure class="back" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            id="question2">
+                            <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FMwf3d%2FbtsGDJQUoV3%2FRoxk0SobtKdrCdfMhcGiPK%2Fimg.png"
+                                alt="hoverRight 이미지">
+                            <figcaption>
+                                <h5>'사과' 하면 뭐가 생각나나요?</h5>
+                                <p>(댓글창은 클릭!)</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="down">
+            <div class="hover__wrap2">
+                <div class="hover__leftright">
+                    <figure class="front">
+                        <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FMwf3d%2FbtsGDJQUoV3%2FRoxk0SobtKdrCdfMhcGiPK%2Fimg.png"
+                            alt="hoverLeft 이미지">
+                        <figcaption>
+                            <h3>Q3</h3>
+                            <p>마우스를 올려주세요.</p>
+                        </figcaption>
+                    </figure>
+
+                    <figure class="back" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                        id="question3">
+                        <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FMwf3d%2FbtsGDJQUoV3%2FRoxk0SobtKdrCdfMhcGiPK%2Fimg.png"
+                            alt="hoverRight 이미지">
+                        <figcaption>
+                            <h5>당신이 요리할 때 어느 스타일인가요?</h5>
+                            <p>(댓글창은 클릭!)</p>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+
+            <div class="hover__wrap3">
+                <div class="hover__leftright">
+                    <figure class="front">
+                        <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FMwf3d%2FbtsGDJQUoV3%2FRoxk0SobtKdrCdfMhcGiPK%2Fimg.png"
+                            alt="hoverLeft 이미지">
+                        <figcaption>
+                            <h3>Q4</h3>
+                            <p>마우스를 올려주세요.</p>
+                        </figcaption>
+                    </figure>
+
+                    <figure class="back" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                        id="question4">
+                        <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FMwf3d%2FbtsGDJQUoV3%2FRoxk0SobtKdrCdfMhcGiPK%2Fimg.png"
+                            alt="hoverRight 이미지">
+                        <figcaption>
+                            <h5>평소 나의 모습과 좀 더 가까운 것은?</h5>
+                            <p>(댓글창은 클릭!)</p>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="modal">
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Q1. 아무도 없는 집에 들어가면 어떤가요?</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-check" style="padding-left: 0px; text-indent: -0px;"
+                                value="나영 : 혼자보단 둘,, 둘 보다는 셋,,💁">
+                                <label class="form-check-label" for="flexRadioDefault1" id="label1">
+                                    나영 : 혼자보단 둘,, 둘 보다는 셋,,💁
+                                </label>
+                            </div>
+                            <div class="form-check1" value="현아 : 아무도 없는 집에 들어가면 내 맘대로 할 수 있으니까!">
+                                <label class="form-check-label" for="flexRadioDefault1" id="label2">
+                                    현아 : 아무도 없는 집에 들어가면 내 맘대로 할 수 있으니까!
+                                </label>
+                            </div>
+                            <div class="form-check2" value="일영 : 그 시간 만큼 행복한 시간이 없음,, ,">
+                                <label class="form-check-label" for="flexRadioDefault1" id="label3">
+                                    일영 : 그 시간 만큼 행복한 시간이 없음,, ,
+                                </label>
+                            </div>
+                            <div class="form-check3" value="해정 : 남편이랑 잠시 떨어져 나만의 시간을 즐길 수 있어서..ㅎㅎ 숨통이 트이는 느낌">
+                                <label class="form-check-label" for="flexRadioDefault1" id="label4">
+                                    해정 : 남편이랑 잠시 떨어져 나만의 시간을 즐길 수 있어서 .. ㅎㅎ
+                                    <p>숨통이 트이는 느낌</p>
+                                </label>
+                            </div>
+                            <div class="form-check3" value="해정 : 남편이랑 잠시 떨어져 나만의 시간을 즐길 수 있어서..ㅎㅎ 숨통이 트이는 느낌">
+                                <label class="form-check-label" for="flexRadioDefault1" id="label5">
+                                    효진 : 나만의 시간으로 충전 중…!
+                                </label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="comments-section">
+                                <input type="hidden" id="modal">
+                                <h3 class="top"></h3>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">이름</th>
+                                            <th scope="col">댓글</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="comment-table-body">
+                                        <!-- Firestore에서 가져온 댓글이 여기에 추가 -->
+                                    </tbody>
+                                    <form id="comment-form" width="500px">
+                                        <div class="mb-3">
+                                            <label for="name-input" class="form-label">이름</label>
+                                            <input type="text" class="form-control" id="name-input"
+                                                placeholder="이름을 입력하세요...">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="comment-input" class="form-label">내용</label>
+                                            <textarea class="form-control" id="comment-input" rows="4"
+                                                placeholder="내용을 입력하세요..."></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-dark" id="comment">댓글 작성</button>
+                                    </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="module">
+        let qq = 0;
+        let modalCollections = ['q1', 'q2', 'q3', 'q4'];
+        const appCollections = ['comments_q1', 'comments_q2', 'comments_q3', 'comments_q4'];
+
+        // Firebase SDK 라이브러리 가져오기
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+        import { getFirestore, collection, addDoc, getDocs, setDoc, doc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
+
+        // Firebase 구성 정보 설정
+        const firebaseConfig = {
+            apiKey: "AIzaSyALOBgwNixaYE3Ckm2rVDAept8DluZ_d1E",
+            authDomain: "bti-fbc0e.firebaseapp.com",
+            projectId: "bti-fbc0e",
+            storageBucket: "bti-fbc0e.appspot.com",
+            messagingSenderId: "547737531654",
+            appId: "1:547737531654:web:9d3670613d4e34a88f9a87",
+            measurementId: "G-BHXZ7XND1Z"
+        };
+
+        // Firebase 인스턴스 초기화
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const database = getDatabase(app);
+
+        $(document).ready(function () {
+            for (let i = 0; i < 4; i++) {
+                $(`#question${i + 1}`).hover(function () {
+                    qq = i;
+                    const modalTitleColor = getModalTitleColor(i);
+                    $('#comment').removeClass().addClass(`btn btn-custom${i + 1}`);
+                    $('.modal-title').css("color", modalTitleColor);
+                    qwe();
+                });
+            }
+        });
+
+        function getModalTitleColor(index) {
+            const colors = ['rgb(147, 109, 176)', 'rgb(103, 164, 79)', 'rgb(79, 164, 163)', 'rgb(177, 154, 67)'];
+            return colors[index] || 'black';
+        }
+
+        function qwe() {
+            const commentForm = document.getElementById('comment-form');
+
+            // 이전 리스너 제거
+            commentForm.removeEventListener('submit', submitCommentHandler);
+
+            // 새로운 리스너 등록
+            commentForm.addEventListener('submit', submitCommentHandler);
+
+            // 페이지 로드 시 댓글 로드
+            loadComments();
+        }
+
+        async function submitCommentHandler(e) {
+            e.preventDefault();
+            const nameInput = document.getElementById('name-input');
+            const commentInput = document.getElementById('comment-input');
+            const name = nameInput.value.trim();
+            const message = commentInput.value.trim();
+            if (name !== '' && message !== '') {
+                try {
+                    // 댓글을 현재 모달의 Firestore 컬렉션에 저장
+                    await addDoc(collection(db, appCollections[qq]), {
+                        name: name,
+                        message: message
+                    });
+
+                    nameInput.value = '';
+                    commentInput.value = '';
+
+                    // 댓글 추가 후 불러오기
+                    loadComments();
+                } catch (error) {
+                    console.error('Error adding comment: ', error);
+                }
+            }
+        }
+
+        // 댓글 로드 함수
+        async function loadComments() {
+            try {
+                const querySnapshot = await getDocs(collection(db, appCollections[qq]));
+                const comments = {};
+                querySnapshot.forEach((doc) => {
+                    comments[doc.id] = doc.data();
+                });
+                displayCommentsInTable(comments);
+            } catch (error) {
+                console.error('Error loading comments: ', error);
+            }
+        }
+
+        // 테이블에 댓글 표시 함수
+        function displayCommentsInTable(comments) {
+            const commentTableBody = document.getElementById('comment-table-body');
+            commentTableBody.innerHTML = '';
+            for (const key in comments) {
+                const comment = comments[key];
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                <td>${comment.name}</td>
+                <td>${comment.message}</td>
+            `;
+                commentTableBody.appendChild(row);
+            }
+        }
+    </script>
+
+    <!-- 모달 -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
+    <script>
+        function kkk(name) {
+            let data = $('input[name=' + name + ']').val();
+            location.href = `qmc1.html?data=${data}`
+        }
+    </script>
+</body>
+
+</html>
