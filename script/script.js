@@ -212,4 +212,16 @@ $(document).ready(function () {
         $('#nickname').text('피글렛, 햄스터');
         document.getElementById('res_img').src='../images/정효진.jpg';
     }
+    if(result=="정효진"){
+        $('#res_img').click(function() {
+            window.location.href = "hyojin_CommentPage.html";
+        });
+        $('#result_name').text('정효진');
+        $('#result_hobby').text('게임, 웹툰');
+        $('#mbti').text('INFP');
+        $('#good').text('밝음, 긍정적임');
+        $('#bad').text('귀차니즘');
+        $('#nickname').text('피글렛, 햄스터');
+        document.getElementById('res_img').src='./정효진.jpg';
+    }
 })
