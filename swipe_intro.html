@@ -112,11 +112,8 @@
             let imageURL;
 
             try {
-
                 const imageURL = await uploadImageAndGetURL(uploadPhoto);
-
                 const teamMembersCollection = collection(db, 'teamMembers');
-
                 // 동일한 이름이 있는 지 확인
                 const querySnapshot = await getDocs(query(teamMembersCollection, where("Name", "==", inputName)));
                 if (!querySnapshot.empty) {
@@ -159,29 +156,23 @@
             try {
                 const storageRef = ref(storage, 'images/' + imageFile.name);
                 await uploadBytes(storageRef, imageFile);
-
                 // firebase - storage 에서 이미지주소 가져오기
                 const downloadURL = await getDownloadURL(storageRef);
                 // console.log('Image URL:', downloadURL);
                 return downloadURL;
-
             } catch (error) {
                 // console.error('Error uploading image:', error); 
                 throw error;
             }
         }
 
-
-
         $(document).ready(async function () {
-
             $('.carousel-inner').empty();
             // 팀원 저장내용 불러오기
             let docs = await getDocs(collection(db, "teamMembers"));
 
             docs.forEach((doc) => {
                 let row = doc.data();
-
                 let inputName = row['Name'];
                 let inputIntro = row['inputIntro'];
                 let inputHobby = row['Hobby'];
@@ -227,7 +218,7 @@
                                 <p> 별명 : ${inputNickname}</p>
                                 <p> 좌우명 : ${inputMotto}</p>
 
-                                <p><a class="btn btn-lg btn-primary" href="#">Make a comment</a></p>
+                                <p><a class="btn btn-lg btn-primary" href="#" onclick="location.href='${inputName}_CommentPage.html'">Make a comment</a></p>
                             </div>
                         </div>
                     </div>
@@ -237,18 +228,18 @@
 
             $('.carousel-item').first().addClass('active');
 
-
             // carousel 아래 목록 버튼 추가
             let indicatorCount = $('.carousel-indicators button').length; // 목록 개수 확인
             // 목록 버튼 추가
             let newIndicator = `<button type="button" data-bs-target="#myCarousel" data-bs-slide-to="${indicatorCount}" aria-label="Slide ${indicatorCount + 1}"></button>`;
             $('.carousel-indicators').append(newIndicator);
-
             // 기존 마지막 목록버튼 active 삭제, 마지막 목록버튼에 active 기능 추가
             $('.carousel-indicators button').removeClass('active');
             $(`.carousel-indicators button[data-bs-slide-to="${indicatorCount}"]`).addClass('active');
 
         });
+
+        
 
 
 
