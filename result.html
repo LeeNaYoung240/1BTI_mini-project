@@ -42,10 +42,9 @@
         body {
             background-color: white;
         }
-
-        .result_card {
+        .result_card{
             width: auto;
-            height: 800px;
+            height:800px;
             background-color: rgba(240, 248, 255, 0.667);
         }
 
@@ -139,8 +138,6 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
-        
-        
 
     </script>
     <script type="module" src="./script.js"></script>
@@ -162,11 +159,11 @@
                     alt="팀 로고" width="200" height="150">
                 <!-- 메뉴 목록 -->
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="Home.html" class="nav-link px-2 text-danger">Home</a></li>
-                    <li><a href="" class="nav-link px-2 text-secondary">Mypage</a></li>
-                    <li><a href="question1.html" class="nav-link px-2 text-secondary">설문 하러가기</a></li>
-
-
+                    <li><a href="Home.html" class="nav-link px-2 text-secondary">Home</a></li>
+                    <li><a href="#" class="nav-link px-2 text-danger">Mypage</a></li>
+                    <li><a href="q_a.html" class="nav-link px-2 text-secondary">Q&A</a></li>
+                    <li><a href="swipe_intro.html" class="nav-link px-2 text-secondary">Team</a></li>
+                    <li><a href="feedback.html" class="nav-link px-2 text-secondary">설문 하러가기</a></li>
                 </ul>
             </div>
         </div>
@@ -189,8 +186,8 @@
             </div>
         </div>
         <div class="button">
-            <a class="btn btn-primary1" href="Home.html" role="button">다른 팀원도 보러가기</a>
-            <a class="btn btn-primary2" href="#" role="button">질문별 답변 보러가기</a>
+            <a class="btn btn-primary1" href="swipe_intro.html" role="button">다른 팀원도 보러가기</a>
+            <a class="btn btn-primary2" href="q_a.html" role="button">질문별 답변 보러가기</a>
         </div>
     </div>
 </body>

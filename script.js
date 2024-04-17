@@ -50,14 +50,14 @@ function res() {
                                     result = "조현아";
                                     break;
                                 case '02':
-                                    result = "윤일영";
+                                    result = "정효진";
                                     break;
                             }
                             break;
                         case '02':
                             switch (cookies[0][1]) {
                                 case '01':
-                                    result = "윤일영";
+                                    result = "조현아";
                                     break;
                                 case '02':
                                     result = "윤일영";
@@ -74,7 +74,7 @@ function res() {
                                     result = "한해정";
                                     break;
                                 case '02':
-                                    result = "한해정";
+                                    result = "정효진";
                                     break;
                             }
                             break;
@@ -109,7 +109,7 @@ function res() {
                         case '02':
                             switch (cookies[0][1]) {
                                 case '01':
-                                    result = "조현아";
+                                    result = "윤일영";
                                     break;
                                 case '02':
                                     result = "이나영";
@@ -126,14 +126,14 @@ function res() {
                                     result = "이나영";
                                     break;
                                 case '02':
-                                    result = "한해정";
+                                    result = "정효진";
                                     break;
                             }
                             break;
                         case '02':
                             switch (cookies[0][1]) {
                                 case '01':
-                                    result = "이나영";
+                                    result = "한해정";
                                     break;
                                 case '02':
                                     result = "이나영";
@@ -154,7 +154,7 @@ $(document).ready(function () {
     let result = res();
     if(result=="조현아"){
         $('#res_img').click(function() {
-            window.location.href = "hyuna_CommentPage.html";
+            window.location.href = "johyuna_CommentPage.html";
         });
         $('#result_name').text('조현아');
         $('#result_hobby').text('노래부르기, 책읽기, 게임하기');
@@ -166,7 +166,7 @@ $(document).ready(function () {
     }
     if(result=="한해정"){
         $('#res_img').click(function() {
-            window.location.href = "haejung_CommentPage.html";
+            window.location.href = "hanhaejung_CommentPage.html";
         });
         $('#result_name').text('한해정');
         $('#result_hobby').text('스쿼시');
@@ -178,7 +178,7 @@ $(document).ready(function () {
     }
     if(result=="이나영"){
         $('#res_img').click(function() {
-            window.location.href = "nayoung_Comment.html";
+            window.location.href = "leenayoung_CommentPage.html";
         });
         $('#result_name').text('이나영');
         $('#result_hobby').text('웹툰, 강아지 산책');
@@ -190,7 +190,7 @@ $(document).ready(function () {
     }
     if(result=="윤일영"){
         $('#res_img').click(function() {
-            window.location.href = "ilyoung_CommentPage.html";
+            window.location.href = "yoonilyoung_CommentPage.html";
         });
         $('#result_name').text('윤일영');
         $('#result_hobby').text('음악감상');
@@ -199,5 +199,17 @@ $(document).ready(function () {
         $('#bad').text('게으름, 부정적');
         $('#nickname').text('씹프피, 찐따');
         document.getElementById('res_img').src='./윤일영.jpeg';
+    }
+    if(result=="정효진"){
+        $('#res_img').click(function() {
+            window.location.href = "jeonghyojin_CommentPage.html";
+        });
+        $('#result_name').text('정효진');
+        $('#result_hobby').text('게임, 웹툰');
+        $('#mbti').text('INFP');
+        $('#good').text('밝음, 긍정적임');
+        $('#bad').text('귀차니즘');
+        $('#nickname').text('피글렛, 햄스터');
+        document.getElementById('res_img').src='./정효진.jpg';
     }
 })
