@@ -478,9 +478,10 @@
                         alt="팀 로고" width="200" height="150">
                     <!-- 메뉴 목록 -->
                     <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                        <li><a href="#" class="nav-link px-2 text-danger">Home</a></li>
-                        <li><a href="#" class="nav-link px-2 text-secondary">Mypage</a></li>
-                        <li><a href="#" class="nav-link px-2 text-secondary">설문 하러가기</a></li>
+                        <li><a href="Home.html" class="nav-link px-2 text-secondary">Home</a></li>
+                        <li><a href="q_a.html" class="nav-link px-2 text-danger">Q&A</a></li>
+                        <li><a href="swipe_intro.html" class="nav-link px-2 text-secondary">Team</a></li>
+                        <li><a href="feedback.html" class="nav-link px-2 text-secondary">설문 하러가기</a></li>
                     </ul>
                 </div>
             </div>
@@ -628,9 +629,6 @@
                             <div class="comments-section">
                                 <input type="hidden" id="modal">
                                 <h3 class="top"></h3>
-                                <div class="comments-list">
-                                    <!-- Comments will be dynamically added here -->
-                                </div>
                                 <table class="table">
                                     <thead>
                                         <tr>
@@ -665,47 +663,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="module">
         let qq = 0;
-        let modalJjangna = [["Q1. 아무도 없는 집에 들어가면 어떤가요?", "나영 : 혼자보단 둘,, 둘 보다는 셋,,💁", "현아 : 아무도 없는 집에 들어가면 내 맘대로 할 수 있으니까!", "일영 : 그 시간 만큼 행복한 시간이 없음,, ,", "해정 : 남편이랑 잠시 떨어져 나만의 시간을 즐길 수 있어서..ㅎㅎ 숨통이 트이는 느낌", "효진 : 나만의 시간으로 충전 중…!"]
-            , ["Q2. '사과' 하면 뭐가 생각나나요?", "나영 : 사과는 맛있어..맛있으면 바나나..바나나는 길어.. 길으면 기차..🚂", "현아 : 사과하면 애플 아닌가요?", "일영 : 백설공주가 독이 없는 사과를 먹었더라면, ,,", "해정 : 그냥 빨갛게 생긴 과일, 당근과 양배추를 같이 갈아서 마시면 건강에 좋은 CCA주스!!!", "효진 : 사과 하면 과일!"]
-            , ["Q3. 당신이 요리할 때 어느 스타일인가요?", "나영 : 음식은 손맛. 정석적인 건 재미없어요ㅠ,, 제가 못해서 하는 말은 아니고..🙄", "현아 : 손맛으로 해도 맛있던데…ㅎ", "일영 : 맛있는 재료 다 넣었으면 뭘 해도 맛있겠지 ^_^", "해정 : 손맛과 정성으로 만들어진 요리가 그 무엇보다 맛있습니다. 침 꼴깍", "효진 : 음식은 맛있어야하니까 무조건 계량으루"]
-            , ["Q4. 평소 나의 모습에 더 가까운 것은?", "나영 : 남에게 의존을 많이해서 독립적인 사람은 아닌 거 같아요,,🥺", "현아 : 혼자 있는 걸 좋아해용", "일영 : 뭔가 내가 생각했던 대로 안 되면 자거나 쉬기도 싫고 꽤나 스트레스 받음 피곤", "해정 : 맡은 일에는 한번 보고 두번보고 자꾸만 보고 싶네~ 내가 마음에 들 때까지 다시 보게 되요오 ~", "효진 : 실수를 하지 않기 위한 완벽주의 성향을 가짐"]];
-
-        for (let i = 0; i < 6; i++) {
-            $(`#question${i + 1}`).hover(function () {
-                $('#exampleModalLabel').text(modalJjangna[i][0]);
-                $('#label1').text(modalJjangna[i][1]);
-                $('#label2').text(modalJjangna[i][2]);
-                $('#label3').text(modalJjangna[i][3]);
-                $('#label4').text(modalJjangna[i][4]);
-                $('#label5').text(modalJjangna[i][5]);
-
-
-                switch (i) {
-                    case 0: qq = i; qwe();
-                        $('#comment').removeClass();
-                        $('#comment').addClass("btn btn-custom1");
-                        $('.modal-title').css("color", "rgb(147, 109, 176)");
-                        break;
-                    case 1: qq = i; qwe();
-                        $('#comment').removeClass();
-                        $('#comment').addClass("btn btn-custom2");
-                        $('.modal-title').css("color", "rgb(103, 164, 79)");
-                        break;
-                    case 2: qq = i; qwe();
-                        $('#comment').removeClass();
-                        $('#comment').addClass("btn btn-custom3");
-                        $('.modal-title').css("color", "rgb(79, 164, 163)");
-                        break;
-                    case 3: qq = i; qwe();
-                        $('#comment').removeClass();
-                        $('#comment').addClass("btn btn-custom4");
-                        $('.modal-title').css("color", "rgb(177, 154, 67)");
-                        break;
-                    default: ;
-                }
-            });
-
-        }
+        let modalCollections = ['q1', 'q2', 'q3', 'q4'];
+        const appCollections = ['comments_q1', 'comments_q2', 'comments_q3', 'comments_q4'];
 
         // Firebase SDK 라이브러리 가져오기
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
@@ -724,102 +683,97 @@
             measurementId: "G-BHXZ7XND1Z"
         };
 
-
         // Firebase 인스턴스 초기화
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
         const database = getDatabase(app);
 
+        $(document).ready(function () {
+            for (let i = 0; i < 4; i++) {
+                $(`#question${i + 1}`).hover(function () {
+                    qq = i;
+                    const modalTitleColor = getModalTitleColor(i);
+                    $('#comment').removeClass().addClass(`btn btn-custom${i + 1}`);
+                    $('.modal-title').css("color", modalTitleColor);
+                    qwe();
+                });
+            }
+        });
+
+        function getModalTitleColor(index) {
+            const colors = ['rgb(147, 109, 176)', 'rgb(103, 164, 79)', 'rgb(79, 164, 163)', 'rgb(177, 154, 67)'];
+            return colors[index] || 'black';
+        }
+
         function qwe() {
-            // 댓글 데이터베이스 참조
-            let commentsRef = ref(database, `comments`);
+            const commentForm = document.getElementById('comment-form');
+
+            // 이전 리스너 제거
+            commentForm.removeEventListener('submit', submitCommentHandler);
+
+            // 새로운 리스너 등록
+            commentForm.addEventListener('submit', submitCommentHandler);
 
             // 페이지 로드 시 댓글 로드
-            onValue(commentsRef, (snapshot) => {
-                const comments = snapshot.val();
-                displayComments(comments);
-                alert('asdf');
-            });
+            loadComments();
+        }
 
+        async function submitCommentHandler(e) {
+            e.preventDefault();
+            const nameInput = document.getElementById('name-input');
+            const commentInput = document.getElementById('comment-input');
+            const name = nameInput.value.trim();
+            const message = commentInput.value.trim();
+            if (name !== '' && message !== '') {
+                try {
+                    // 댓글을 현재 모달의 Firestore 컬렉션에 저장
+                    await addDoc(collection(db, appCollections[qq]), {
+                        name: name,
+                        message: message
+                    });
 
-            function displayComments(comments) {
-                const commentsList = document.querySelector('.comments-list');
-                concole.log(commentsList);
-                commentsList.innerHTML = '';
-                for (const key in comments) {
-                    const comment = comments[key];
-                    const commentDiv = document.createElement('div');
-                    commentDiv.classList.add('comment');
-                    commentDiv.innerHTML = `
-                    <strong>${comment.name}</strong>: ${comment.message}
-                `;
-                    commentsList.appendChild(commentDiv);
+                    nameInput.value = '';
+                    commentInput.value = '';
+
+                    // 댓글 추가 후 불러오기
+                    loadComments();
+                } catch (error) {
+                    console.error('Error adding comment: ', error);
                 }
             }
+        }
 
-            document.getElementById('comment-form').addEventListener('submit', async (e) => {
-                //제출버튼, 댓글 저장
-                e.preventDefault();
-                const nameInput = document.getElementById('name-input');
-                const commentInput = document.getElementById('comment-input');
-                const name = nameInput.value.trim();
-                const message = commentInput.value.trim();
-                if (name !== '' && message !== '') {
-                    try {
-
-                        await addDoc(collection(db, `comments${qq}`), {
-                            name: name,
-                            message: message
-                        });
-                        nameInput.value = '';
-                        commentInput.value = '';
-                        alert('댓글 저장 성공!');
-
-                        // 추가 코드: 댓글이 추가되면 새로운 댓글을 불러옴
-                        getDocs(collection(db, `comments${qq}`)).then((querySnapshot) => {
-                            const comments = {};
-                            querySnapshot.forEach((doc) => {
-                                comments[doc.id] = doc.data();
-                            });
-                            displayCommentsInTable(comments);
-                        });
-                    } catch (error) {
-                        console.error('Error adding comment: ', error);
-                    }
-                }
-            });
-            function displayCommentsInTable(comments) {
-                const commentTableBody = document.getElementById('comment-table-body');
-                commentTableBody.innerHTML = '';
-                for (const key in comments) {
-                    const comment = comments[key];
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                    <td>${comment.name}</td>
-                    <td>${comment.message}</td>
-                `;
-                    commentTableBody.appendChild(row);
-                }
-            }
-
-            // 페이지 로드 시 댓글 로드
-            getDocs(collection(db, `comments${qq}`)).then((querySnapshot) => {
+        // 댓글 로드 함수
+        async function loadComments() {
+            try {
+                const querySnapshot = await getDocs(collection(db, appCollections[qq]));
                 const comments = {};
                 querySnapshot.forEach((doc) => {
                     comments[doc.id] = doc.data();
                 });
                 displayCommentsInTable(comments);
-            });
+            } catch (error) {
+                console.error('Error loading comments: ', error);
+            }
         }
 
-        $(function () {
-            const urlParams = new URLSearchParams(window.location.search);
-            let data = urlParams.get("data");
-
-            $("#123").val(data);
-        }) 
+        // 테이블에 댓글 표시 함수
+        function displayCommentsInTable(comments) {
+            const commentTableBody = document.getElementById('comment-table-body');
+            commentTableBody.innerHTML = '';
+            for (const key in comments) {
+                const comment = comments[key];
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                <td>${comment.name}</td>
+                <td>${comment.message}</td>
+            `;
+                commentTableBody.appendChild(row);
+            }
+        }
     </script>
+
     <!-- 모달 -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"

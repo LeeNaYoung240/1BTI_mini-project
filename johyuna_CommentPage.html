@@ -17,7 +17,6 @@
             font-family: "Gowun Dodum", sans-serif;
         }
 
-
         /*상단의 로고 - 현재 blue로 되어있음*/
         .title_logo {
             /*로고 높이 100*/
@@ -133,7 +132,7 @@
         const database = getDatabase(app);
 
         // 댓글 데이터베이스 참조
-        const commentsRef = ref(database, 'nayoungcomments');
+        const commentsRef = ref(database, 'hyunacomments');
 
         document.getElementById('comment-form').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -144,21 +143,16 @@
             if (name !== '' && message !== '') {
                 try {
 
-                    await addDoc(collection(db, 'nayoungcomments'), {
+                    await addDoc(collection(db, 'hyunacomments'), {
                         name: name,
                         message: message
                     });
-
                     nameInput.value = '';
                     commentInput.value = '';
-
-                    nameInput.value = '';
-                    commentInput.value = '';
-
                     alert('댓글 저장 성공!');
 
                     // 추가 코드: 댓글이 추가되면 새로운 댓글을 불러옴
-                    getDocs(collection(db, 'nayoungcomments')).then((querySnapshot) => {
+                    getDocs(collection(db, 'hyunacomments')).then((querySnapshot) => {
                         const comments = {};
                         querySnapshot.forEach((doc) => {
                             comments[doc.id] = doc.data();
@@ -185,7 +179,7 @@
         }
 
         // 페이지 로드 시 댓글 로드
-        getDocs(collection(db, 'nayoungcomments')).then((querySnapshot) => {
+        getDocs(collection(db, 'hyunacomments')).then((querySnapshot) => {
             const comments = {};
             querySnapshot.forEach((doc) => {
                 comments[doc.id] = doc.data();
@@ -212,9 +206,11 @@
                     alt="팀 로고" width="200" height="150">
                 <!-- 메뉴 목록 -->
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="Home.html" class="nav-link px-2 text-danger">Home</a></li>
-                    <li><a href="#" class="nav-link px-2 text-secondary">Mypage</a></li>
-                    <li><a href="#" class="nav-link px-2 text-secondary">설문 하러가기</a></li>
+                    <li><a href="Home.html" class="nav-link px-2 text-secondary">Home</a></li>
+                    <li><a href="#" class="nav-link px-2 text-danger">Mypage</a></li>
+                    <li><a href="q_a.html" class="nav-link px-2 text-secondary">Q&A</a></li>
+                    <li><a href="swipe_intro.html" class="nav-link px-2 text-secondary">Team</a></li>
+                    <li><a href="feedback.html" class="nav-link px-2 text-secondary">설문 하러가기</a></li>
                 </ul>
             </div>
         </div>
@@ -226,27 +222,26 @@
         <div class="member_card_container">
             <div class="member_card">
                 <button type="button" class="btn btn-primary position-relative">
-                    ENFP
+                    INFP
                     <span
                         class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
                         <i class="fas fa-heart text-white" style="font-size: 0.85rem;"></i>
                         <span class="visually-hidden">New alerts</span>
                     </span>
                 </button>
-                <img src="https://github.com/LeeNaYoung240/1BTI_mini-project/assets/107848521/8e9efd4a-1650-4d29-813b-f3e25c338fe9"
-                    alt="이나영">
-                <h3>이나영</h3>
+                <img src="https://github.com/LeeNaYoung240/LeeNaYoung240.github.io/assets/107848521/d9febadb-f84c-473a-ace1-7ce1b0e145fd"
+                    alt="조현아">
+                <h3>조현아</h3>
             </div>
             <div class="intro_container">
-
                 <h3>자기소개서 💁‍♀️</h3>
-                <p> 한 줄 키워드 : 재미 빼면 시체 ☠</p>
-                <p> 취미 : 강아지 산책🐶, 웹툰 📃</p>
-                <p> MBTI : ENFP</p>
-                <p> 장점 : 밤새 고민할 수 있는 끈기 💪</p>
-                <p> 단점 : 수동적인 성격, 감정에 지배적 🤸‍♀️</p>
-                <p> 별명 : 영나이 </p>
-                <p> 좌우명 : 그 여정이 바로 보상이다. 🎈 </p>
+                <p> 한 줄 키워드 : 응애 나 애기 스무살! 🧒</p>
+                <p> 취미 : 노래 부르기🎤, 책 읽기📕, 게임🎮</p>
+                <p> MBTI : INFP</p>
+                <p> 장점 : 순간 집중력, 추진력 💨</p>
+                <p> 단점 : 게으름, 귀차니즘 💫</p>
+                <p> 별명 : 조리조리 </p>
+
             </div>
         </div>
     </div>
@@ -254,7 +249,6 @@
     <!-- 댓글 섹션 -->
     <div class="comments-section">
         <h3>댓글 💌</h3>
-       
         <table class="table">
             <thead>
                 <tr>
@@ -267,11 +261,7 @@
             </tbody>
             <form id="comment-form">
                 <div class="mb-3">
-
                     <label for="name-input" class="form-label">닉네임</label>
-
-                    <label for="name-input" class="form-label">이름</label>
-
                     <input type="text" class="form-control" id="name-input" placeholder="이름을 입력하세요...">
                 </div>
                 <div class="mb-3">
