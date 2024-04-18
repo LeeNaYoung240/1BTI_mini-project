@@ -202,7 +202,7 @@ $(document).ready(function () {
     }
     if(result=="정효진"){
         $('#res_img').click(function() {
-            window.location.href = "jeonghyojin_CommentPage.html";
+            window.location.href = "junghyojin_CommentPage.html";
         });
         $('#result_name').text('정효진');
         $('#result_hobby').text('게임, 웹툰');
