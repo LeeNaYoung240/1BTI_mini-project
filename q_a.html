@@ -478,10 +478,9 @@
                         alt="팀 로고" width="200" height="150">
                     <!-- 메뉴 목록 -->
                     <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                        <li><a href="Home.html" class="nav-link px-2 text-secondary">Home</a></li>
-                        <li><a href="q_a.html" class="nav-link px-2 text-danger">Q&A</a></li>
-                        <li><a href="swipe_intro.html" class="nav-link px-2 text-secondary">Team</a></li>
-                        <li><a href="feedback.html" class="nav-link px-2 text-secondary">설문 하러가기</a></li>
+                        <li><a href="#" class="nav-link px-2 text-danger">Home</a></li>
+                        <li><a href="#" class="nav-link px-2 text-secondary">Mypage</a></li>
+                        <li><a href="#" class="nav-link px-2 text-secondary">설문 하러가기</a></li>
                     </ul>
                 </div>
             </div>
@@ -672,7 +671,7 @@
             , ["Q3. 당신이 요리할 때 어느 스타일인가요?", "나영 : 음식은 손맛. 정석적인 건 재미없어요ㅠ,, 제가 못해서 하는 말은 아니고..🙄", "현아 : 손맛으로 해도 맛있던데…ㅎ", "일영 : 맛있는 재료 다 넣었으면 뭘 해도 맛있겠지 ^_^", "해정 : 손맛과 정성으로 만들어진 요리가 그 무엇보다 맛있습니다. 침 꼴깍","효진 : 음식은 맛있어야하니까 무조건 계량으루" ]
             , ["Q4. 평소 나의 모습에 더 가까운 것은?", "나영 : 남에게 의존을 많이해서 독립적인 사람은 아닌 거 같아요,,🥺", "현아 : 혼자 있는 걸 좋아해용", "일영 : 뭔가 내가 생각했던 대로 안 되면 자거나 쉬기도 싫고 꽤나 스트레스 받음 피곤", "해정 : 맡은 일에는 한번 보고 두번보고 자꾸만 보고 싶네~ 내가 마음에 들 때까지 다시 보게 되요오 ~","효진 : 실수를 하지 않기 위한 완벽주의 성향을 가짐"]];
 
-        for (let i = 0; i < 6; i++) {
+        for (let i = 0; i < 6; i++) {  
             $(`#question${i + 1}`).hover(function () {
                 $('#exampleModalLabel').text(modalJjangna[i][0]);
                 $('#label1').text(modalJjangna[i][1]);
@@ -680,6 +679,8 @@
                 $('#label3').text(modalJjangna[i][3]);
                 $('#label4').text(modalJjangna[i][4]);
                 $('#label5').text(modalJjangna[i][5]);
+                
+
             });
 
         }
